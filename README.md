@@ -16,3 +16,8 @@ A project used to measure trade odds and record the report.
 - [ ] 交易指标分析
 - [ ] 交易策略统计
 - [ ] 各交易指标胜率统计
+
+未来规划：
+- [ ] 基金收益率
+- [ ] 股票操作记录及盈亏率分析
+- [ ] 大宗商品/贵金属期货操作记录及盈亏率分析
