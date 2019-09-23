@@ -22,8 +22,8 @@ function createDevTools() {
 function createWindow() {
   // 创建浏览器窗口。
   win = new BrowserWindow({ 
-    width: 800, 
-    height: 600,
+    width: 1200, 
+    height: 720,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
