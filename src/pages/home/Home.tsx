@@ -4,30 +4,53 @@ import { Layout, Menu } from 'antd';
 import { inject, observer } from 'mobx-react';
 
 import HomeStore from '../../stores/HomeStore';
-import { IconFont } from '../../components/IconFont';
+import { IconFont } from '../../components/icon-font';
 import React from 'react';
 
-const { Sider, Header, Footer } = Layout;
+const { Sider, Content, Footer } = Layout;
 const MenuItem = Menu.Item;
 
 interface HomeProps {
   homeStore?: HomeStore;
 }
 
+interface HomeState {
+  collapsed: boolean;
+}
+
 @inject('homeStore')
 @observer
-export default class Home extends React.Component<HomeProps> {
+export default class Home extends React.Component<HomeProps, HomeState> {
+  constructor(props: HomeProps) {
+    super(props);
+    this.state = {
+      collapsed: false,
+    };
+  }
+
+  onCollapseChange = () => {
+    this.setState({
+      collapsed: !this.state.collapsed,
+    });
+  };
+
   render() {
+    const { collapsed } = this.state;
+
     return (
       <Layout>
         <Sider
+          theme="light"
           style={{
             height: '100vh',
-            position: 'fixed',
-            left: 0,
+            overflow: 'auto'
           }}
+          collapsible
+          breakpoint="sm"
+          collapsed={collapsed}
+          onCollapse={this.onCollapseChange}
         >
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
+          <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>
             <MenuItem key="1">
               <IconFont type="icon-digital-currency" />
               <span className="nav-text">数字货币</span>
@@ -46,6 +69,13 @@ export default class Home extends React.Component<HomeProps> {
             </MenuItem>
           </Menu>
         </Sider>
+        <Layout>
+          <Content>
+          </Content>
+          <Footer style={{ textAlign: 'center' }}>
+            Personal Finance System ©2020 Created by Nayuta
+          </Footer>
+        </Layout>
       </Layout>
     );
   }
