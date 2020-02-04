@@ -1,1 +1,0 @@
-import './Fund.scss';

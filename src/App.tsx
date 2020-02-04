@@ -1,16 +1,20 @@
 import './App.scss';
+import 'moment/locale/zh-cn';
 
 import * as allStores from './stores';
 
-import { Route, Router, Switch } from 'react-router';
+import { Route, Router, Switch } from 'react-router-dom';
 
+import { ConfigProvider } from 'antd';
 import Home from './pages/home/Home';
-import { LocaleProvider } from 'antd';
 import { Provider } from 'mobx-react';
 import React from 'react';
 import { createHashHistory } from 'history';
+import moment from 'moment';
 import { syncHistoryWithStore } from 'mobx-react-router';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
+
+moment.locale('zh-cn');
 
 const hashHistory = createHashHistory();
 const history = syncHistoryWithStore(hashHistory, allStores.routingStore);
@@ -18,13 +22,13 @@ const history = syncHistoryWithStore(hashHistory, allStores.routingStore);
 const App: React.FC = () => {
   return (
     <Provider {...allStores}>
-      <LocaleProvider locale={zh_CN}>
+      <ConfigProvider locale={zh_CN}>
         <Router history={history}>
           <Switch>
             <Route component={Home} />
           </Switch>
         </Router>
-      </LocaleProvider>
+      </ConfigProvider>
     </Provider>
   );
 };

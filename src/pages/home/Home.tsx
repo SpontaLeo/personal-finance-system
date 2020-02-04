@@ -1,14 +1,15 @@
 import './Home.scss';
 
-import { Layout, Menu } from 'antd';
+import { ChildRoute, HomeMenu } from '../../constants/Route';
+import { Route, Switch } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 
 import HomeStore from '../../stores/HomeStore';
-import { IconFont } from '../../components/icon-font';
+import { Layout } from 'antd';
 import React from 'react';
+import SiderMenu from './sider-menu/SiderMenu';
 
 const { Sider, Content, Footer } = Layout;
-const MenuItem = Menu.Item;
 
 interface HomeProps {
   homeStore?: HomeStore;
@@ -38,39 +39,44 @@ export default class Home extends React.Component<HomeProps, HomeState> {
     const { collapsed } = this.state;
 
     return (
-      <Layout>
+      <Layout className="home">
         <Sider
           theme="light"
+          width="160"
           style={{
             height: '100vh',
-            overflow: 'auto'
+            overflow: 'auto',
           }}
           collapsible
           breakpoint="sm"
           collapsed={collapsed}
           onCollapse={this.onCollapseChange}
         >
-          <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>
-            <MenuItem key="1">
-              <IconFont type="icon-digital-currency" />
-              <span className="nav-text">数字货币</span>
-            </MenuItem>
-            <MenuItem key="2">
-              <IconFont type="icon-fund" />
-              <span className="nav-text">基金定投</span>
-            </MenuItem>
-            <MenuItem key="3">
-              <IconFont type="icon-bill" />
-              <span className="nav-text">个人账单</span>
-            </MenuItem>
-            <MenuItem key="4">
-              <IconFont type="icon-liabilities" />
-              <span className="nav-text">资产负债</span>
-            </MenuItem>
-          </Menu>
+          <SiderMenu />
         </Sider>
         <Layout>
-          <Content>
+          <Content className="content">
+            <Switch>
+              {HomeMenu.map(menu => {
+                return (
+                  <Route
+                    key={menu.key}
+                    path={menu.to}
+                    exact
+                    component={menu.component}
+                  />
+                );
+              })}
+              {ChildRoute.map(route => {
+                return (
+                  <Route
+                    key={route.key}
+                    path={route.to}
+                    component={route.component}
+                  />
+                );
+              })}
+            </Switch>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
             Personal Finance System ©2020 Created by Nayuta
