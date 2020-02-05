@@ -2,10 +2,9 @@ import './Fund.scss';
 
 import { inject, observer } from 'mobx-react';
 
-import { FUNDTABLECOLUMNS } from './constant';
 import FundStore from '../../../stores/FundStore';
+import FundTable from './fund-table/FundTable';
 import React from 'react';
-import { Table } from 'antd';
 
 interface FundProps {
   fundStore?: FundStore;
@@ -20,7 +19,11 @@ export default class Fund extends React.Component<FundProps> {
 
     return (
       <div className="fund">
-        <Table size="small" bordered={true} columns={FUNDTABLECOLUMNS} dataSource={investmentRecordList} />
+        <FundTable
+          size="small"
+          bordered={true}
+          dataSource={investmentRecordList}
+        />
         <div className="noun-description"></div>
       </div>
     );
