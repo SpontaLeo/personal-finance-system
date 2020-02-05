@@ -84,7 +84,9 @@ export default class Home extends React.Component<HomeProps, HomeState> {
               })}
             </Switch>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>
+          <Footer>
+            复利是世界上第八大奇迹——爱因斯坦
+            <br />
             Personal Finance System ©2020 Created by Nayuta
           </Footer>
         </Layout>

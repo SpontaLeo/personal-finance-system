@@ -1,9 +1,28 @@
 import './Fund.scss';
 
-import React from 'react';
+import { inject, observer } from 'mobx-react';
 
-export default class Fund extends React.Component<{}> {
+import { FUNDTABLECOLUMNS } from './constant';
+import FundStore from '../../../stores/FundStore';
+import React from 'react';
+import { Table } from 'antd';
+
+interface FundProps {
+  fundStore?: FundStore;
+}
+
+@inject('fundStore')
+@observer
+export default class Fund extends React.Component<FundProps> {
   render() {
-    return <div>Fund</div>;
+    const fundStore = this.props.fundStore!;
+    const { investmentRecordList } = fundStore;
+
+    return (
+      <div className="fund">
+        <Table size="small" bordered={true} columns={FUNDTABLECOLUMNS} dataSource={investmentRecordList} />
+        <div className="noun-description"></div>
+      </div>
+    );
   }
 }
