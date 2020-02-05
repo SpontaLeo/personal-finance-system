@@ -14,6 +14,11 @@ export default class SiderMenuStore {
     const matchedRoute = HomeMenu.concat(ChildRoute).filter(
       route => route.to === path,
     )[0];
-    return matchedRoute.parentKey ? matchedRoute.parentKey : matchedRoute.key;
+
+    return matchedRoute
+      ? matchedRoute.parentKey
+        ? matchedRoute.parentKey
+        : matchedRoute.key
+      : HomeMenu[0].key;
   }
 }

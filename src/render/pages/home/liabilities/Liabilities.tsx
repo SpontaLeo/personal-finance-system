@@ -11,20 +11,29 @@ interface LiabilitiesProps {
   liabilitiesStore?: LiabilitiesStore;
 }
 
+interface LiabilitiesState {
+  value: moment.Moment;
+}
+
 @inject('liabilitiesStore')
 @observer
-export default class Liabilities extends React.Component<LiabilitiesProps> {
+export default class Liabilities extends React.Component<
+  LiabilitiesProps,
+  LiabilitiesState
+> {
   render() {
-    const { liabilitiesStore } = this.props;
+    const liabilitiesStore = this.props.liabilitiesStore!;
+    const { selectedValue, onDateChange } = liabilitiesStore;
 
     return (
       <Calendar
         mode="year"
+        value={selectedValue}
         validRange={[moment('2020-01-01'), moment('2099-12-31')]}
         disabledDate={(currentDate: moment.Moment) => {
           return currentDate.isAfter(moment());
         }}
-        onSelect={liabilitiesStore!.onDateChange}
+        onSelect={onDateChange}
       />
     );
   }

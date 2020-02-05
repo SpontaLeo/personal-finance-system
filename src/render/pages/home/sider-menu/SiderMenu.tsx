@@ -25,7 +25,8 @@ export default class SiderMenu extends React.Component<SiderMenuProps> {
       <Menu
         theme="light"
         mode="inline"
-        defaultSelectedKeys={[siderMenuStore.currentRoute]}
+        defaultSelectedKeys={[HomeMenu[0].key]}
+        selectedKeys={[siderMenuStore.currentRoute]}
       >
         {HomeMenu.map(menu => {
           return (

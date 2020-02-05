@@ -1,7 +1,7 @@
 import './Home.scss';
 
 import { ChildRoute, HomeMenu } from '../../constants/Route';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 
 import HomeStore from '../../stores/HomeStore';
@@ -57,6 +57,11 @@ export default class Home extends React.Component<HomeProps, HomeState> {
         <Layout>
           <Content className="content">
             <Switch>
+              <Route
+                path="/"
+                exact={true}
+                render={() => <Redirect to="/digital-currency" />}
+              />
               {HomeMenu.map(menu => {
                 return (
                   <Route

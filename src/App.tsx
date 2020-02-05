@@ -1,12 +1,12 @@
 import './App.scss';
 import 'moment/locale/zh-cn';
 
-import * as allStores from './stores';
+import * as allStores from './render/stores';
 
 import { Route, Router, Switch } from 'react-router-dom';
 
 import { ConfigProvider } from 'antd';
-import Home from './pages/home/Home';
+import Home from './render/pages/home/Home';
 import { Provider } from 'mobx-react';
 import React from 'react';
 import { createHashHistory } from 'history';

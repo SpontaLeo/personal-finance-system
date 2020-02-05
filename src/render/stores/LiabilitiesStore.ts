@@ -11,12 +11,15 @@ export default class LiabilitiesStore {
   }
 
   @observable
+  selectedValue: moment.Moment = moment();
+
+  @observable
   selectedMonth: number = moment().month();
 
   @action.bound
   onDateChange(date: any) {
     this.routingStore.push('/liabilities/detail');
+    this.selectedValue = date;
     this.selectedMonth = date.month();
-    console.log(this.routingStore.location.pathname);
   }
 }
