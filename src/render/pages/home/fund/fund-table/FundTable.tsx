@@ -1,18 +1,18 @@
 import './FundTable.scss';
 
+import { Button, Icon, Popover, Table } from 'antd';
 import { ColumnProps, TableProps } from 'antd/lib/table';
 
 import FundModel from '../../../../models/FundModel';
 import React from 'react';
-import { Table } from 'antd';
 import { observer } from 'mobx-react';
 
 type TableColumns = ColumnProps<FundModel>[];
 const defaultColumns: TableColumns = [
   {
-    title: '时间',
-    dataIndex: 'time',
-    key: 'time',
+    title: '日期',
+    dataIndex: 'date',
+    key: 'date',
     align: 'center',
   },
   {
@@ -29,8 +29,8 @@ const defaultColumns: TableColumns = [
   },
   {
     title: '操作',
-    dataIndex: 'action',
-    key: 'action',
+    dataIndex: 'actionType',
+    key: 'actionType',
     align: 'center',
   },
   {
@@ -56,6 +56,9 @@ const defaultColumns: TableColumns = [
     dataIndex: 'dividendYieldRatio',
     key: 'dividendYieldRatio',
     align: 'center',
+    render: (text, record: FundModel) => (
+      <span>{record.dividendYieldRatio.toFixed(2)}</span>
+    ),
   },
   {
     title: '盈利收益率(%)',
@@ -63,6 +66,25 @@ const defaultColumns: TableColumns = [
     key: 'ep',
     align: 'center',
     render: (text, record: FundModel) => <span>{record.ep.toFixed(2)}</span>,
+  },
+  {
+    title: '备注',
+    dataIndex: 'remark',
+    key: 'remark',
+    align: 'center',
+    render: (text, record: FundModel) => (
+      <Popover
+        content={record.remark}
+        trigger="click"
+        overlayStyle={{
+          width: '70vw',
+        }}
+      >
+        <Button type="link">
+          <Icon type="eye" />
+        </Button>
+      </Popover>
+    ),
   },
 ];
 
@@ -86,7 +108,7 @@ const FundTable: React.StatelessComponent<FundTableProps> = ({
   return (
     <Table
       columns={finalColumns}
-      dataSource={dataSource ? dataSource.slice() : []}
+      dataSource={dataSource ? dataSource : []}
       rowKey={r => r.id}
       {...rest}
     />

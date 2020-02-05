@@ -1,10 +1,10 @@
 import { CommmonField } from './common';
 
 export interface FundItem extends CommmonField {
-  time: string;
+  date: string;
   target: string;
   amount: number;
-  actionType: 'buy' | 'sell';
+  action: 'buy' | 'sell';
   price: number;
   // 市盈率
   pe: number;
@@ -12,4 +12,5 @@ export interface FundItem extends CommmonField {
   pb: number;
   // 股息率
   dividendYieldRatio: number;
+  remark: string;
 }

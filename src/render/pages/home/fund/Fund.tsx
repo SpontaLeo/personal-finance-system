@@ -1,7 +1,10 @@
 import './Fund.scss';
 
+import { Button, Icon, Modal } from 'antd';
+import FundForm, { FundItemFieldValues } from './fund-form/FundForm';
 import { inject, observer } from 'mobx-react';
 
+import FundModel from '../../../models/FundModel';
 import FundStore from '../../../stores/FundStore';
 import FundTable from './fund-table/FundTable';
 import React from 'react';
@@ -13,18 +16,91 @@ interface FundProps {
 @inject('fundStore')
 @observer
 export default class Fund extends React.Component<FundProps> {
+  createFundItem = async (values: FundItemFieldValues) => {
+    const fundStore = this.props.fundStore!;
+    fundStore.createFundItem(
+      new FundModel({
+        date: values.date,
+        target: values.target,
+        amount: values.amount,
+        action: values.action,
+        price: values.price,
+        pe: values.pe ? values.pe : 0,
+        pb: values.pb ? values.pb : 0,
+        dividendYieldRatio: values.dividendYieldRatio
+          ? values.dividendYieldRatio
+          : 0,
+        remark: values.remark ? values.remark : '',
+      }),
+    );
+  };
+
   render() {
     const fundStore = this.props.fundStore!;
-    const { investmentRecordList } = fundStore;
+    const {
+      investmentRecordList,
+      openModal,
+      fundModalVisible,
+      fundModalMode,
+      closeModal,
+    } = fundStore;
 
     return (
       <div className="fund">
+        <Button
+          type="primary"
+          style={{ marginBottom: 16 }}
+          onClick={e => openModal()}
+        >
+          新增记录
+        </Button>
         <FundTable
           size="small"
           bordered={true}
           dataSource={investmentRecordList}
+          pagination={
+            investmentRecordList.length >= 10
+              ? {
+                  pageSize: 10,
+                }
+              : false
+          }
+          action={[
+            {
+              title: '操作',
+              dataIndex: 'action',
+              key: 'action',
+              align: 'center',
+              render: (text, record: FundModel) => (
+                <span>
+                  <Button type="link">
+                    <Icon type="edit" />
+                  </Button>
+                  <Button type="link">
+                    <Icon type="delete" />
+                  </Button>
+                </span>
+              ),
+            },
+          ]}
         />
-        <div className="noun-description"></div>
+        <Modal
+          maskClosable={false}
+          title={fundModalMode === 'create' ? '新增定投记录' : '编辑定投记录'}
+          visible={fundModalVisible}
+          onCancel={closeModal}
+          footer={null}
+          destroyOnClose={true}
+        >
+          <FundForm
+            onCancel={closeModal}
+            onConfirm={
+              fundModalMode === 'create'
+                ? this.createFundItem
+                : this.createFundItem
+            }
+          />
+        </Modal>
       </div>
     );
   }
