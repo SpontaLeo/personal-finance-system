@@ -1,3 +1,4 @@
+import FundModel from '../models/FundModel';
 import moment from 'moment';
 import { observable } from 'mobx';
 
@@ -7,18 +8,20 @@ export default class FundStore {
 
   constructor() {
     this.investmentRecordList = [
-      {
-        key: '1',
-        time: moment('2020-01-01').format('YYYY-MM-DD'),
-        target: '华夏300ETF',
+      new FundModel({
+        id: 'dddfsf-dfdfdf-sadfasf',
+        time: moment().format('YYYY-MM-DD'),
+        createdAt: moment().format('YYYY-MM-DD'),
+        updatedAt: moment().format('YYYY-MM-DD'),
+        target: '华夏300',
         amount: 1000,
-        action: '买入',
-        price: 2,
-        PE: 10,
-        PB: 5,
-        'dividend-yield-ratio': 3,
-        EP: 10,
-      },
+        actionType: 'buy',
+        price: 2.41,
+        pe: 20,
+        pb: 1.2,
+        dividendYieldRatio: 10,
+      }),
     ];
+    // this.investmentRecordList = [FundModel.mock()];
   }
 }

@@ -41,27 +41,28 @@ const defaultColumns: TableColumns = [
   },
   {
     title: '市盈率(静)(PE)',
-    dataIndex: 'PE',
-    key: 'PE',
+    dataIndex: 'pe',
+    key: 'pe',
     align: 'center',
   },
   {
     title: '市净率(PB)',
-    dataIndex: 'PB',
-    key: 'PB',
+    dataIndex: 'pb',
+    key: 'pb',
     align: 'center',
   },
   {
     title: '股息率(%)',
-    dataIndex: 'dividend-yield-ratio',
-    key: 'dividend-yield-ratio',
+    dataIndex: 'dividendYieldRatio',
+    key: 'dividendYieldRatio',
     align: 'center',
   },
   {
     title: '盈利收益率(%)',
-    dataIndex: 'EP',
-    key: 'EP',
+    dataIndex: 'ep',
+    key: 'ep',
     align: 'center',
+    render: (text, record: FundModel) => <span>{record.ep.toFixed(2)}</span>,
   },
 ];
 

@@ -1,4 +1,4 @@
-import { CommmonField } from '../../shared/common';
+import { CommmonField } from '../../shared/interfaces/common';
 import { observable } from 'mobx';
 
 export default abstract class BaseModel {

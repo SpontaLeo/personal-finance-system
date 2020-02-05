@@ -1,10 +1,9 @@
 import BaseModel from './BaseModel';
-import { FundItem } from '../../shared/fund';
-import { computed } from 'mobx';
+import { FundItem } from '../../shared/interfaces/fund';
 import moment from 'moment';
 
 export default class FundModel extends BaseModel {
-  time: moment.Moment;
+  time: string;
   target: string;
   amount: number;
   actionType: 'buy' | 'sell';
@@ -12,11 +11,13 @@ export default class FundModel extends BaseModel {
   pe: number;
   pb: number;
   dividendYieldRatio: number;
-  ep: number;
 
-  @computed
+  get ep(): number {
+    return (1 / this.pe) * 100;
+  }
+
   get action(): string {
-    switch (this.action) {
+    switch (this.actionType) {
       case 'buy':
         return '买入';
       case 'sell':
@@ -36,6 +37,5 @@ export default class FundModel extends BaseModel {
     this.pe = data.pe;
     this.pb = data.pb;
     this.dividendYieldRatio = data.dividendYieldRatio;
-    this.ep = data.ep;
   }
 }
