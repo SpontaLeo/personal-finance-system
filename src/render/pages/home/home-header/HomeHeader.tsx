@@ -112,11 +112,7 @@ export default class HomeHeader extends React.Component<
             ) : (
               <span> USD/CNY: {exchangeRate} </span>
             )}
-            {rateSyncing ? (
-              <Icon type="loading" />
-            ) : (
-              <Icon onClick={this.syncRate} type="sync" />
-            )}
+            <Icon type="sync" onClick={this.syncRate} spin={rateSyncing} />
             <Icon onClick={this.editRate} type="edit" />
           </Col>
         </Row>

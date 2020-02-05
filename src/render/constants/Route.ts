@@ -1,3 +1,4 @@
+import Bill from '../pages/home/personal-bill/bill/Bill';
 import DigitalCurrency from '../pages/home/digital-currency/DigitalCurrency';
 import Fund from '../pages/home/fund/Fund';
 import Liabilities from '../pages/home/liabilities/Liabilities';
@@ -29,7 +30,7 @@ export const HomeMenu: RouteItem[] = [
     component: Fund,
   },
   {
-    key: 'bill',
+    key: 'personal-bill',
     to: '/personal-bill',
     title: '个人账单',
     iconType: 'icon-bill',
@@ -50,5 +51,11 @@ export const ChildRoute: RouteItem[] = [
     parentKey: 'liabilities',
     to: '/liabilities/detail',
     component: Liability,
+  },
+  {
+    key: 'bill',
+    parentKey: 'personal-bill',
+    to: '/personal-bill/detail',
+    component: Bill,
   },
 ];

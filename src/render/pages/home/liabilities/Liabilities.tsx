@@ -11,16 +11,9 @@ interface LiabilitiesProps {
   liabilitiesStore?: LiabilitiesStore;
 }
 
-interface LiabilitiesState {
-  value: moment.Moment;
-}
-
 @inject('liabilitiesStore')
 @observer
-export default class Liabilities extends React.Component<
-  LiabilitiesProps,
-  LiabilitiesState
-> {
+export default class Liabilities extends React.Component<LiabilitiesProps> {
   render() {
     const liabilitiesStore = this.props.liabilitiesStore!;
     const { selectedValue, onDateChange } = liabilitiesStore;

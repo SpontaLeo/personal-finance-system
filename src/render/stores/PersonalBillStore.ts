@@ -1,9 +1,9 @@
-import { action, computed, observable } from 'mobx';
+import { action, observable } from 'mobx';
 
 import { RouterStore } from 'mobx-react-router';
 import moment from 'moment';
 
-export default class LiabilitiesStore {
+export default class PersonalBillStore {
   routingStore: RouterStore;
 
   constructor(routingStore: RouterStore) {
@@ -13,14 +13,9 @@ export default class LiabilitiesStore {
   @observable
   selectedValue: moment.Moment = moment();
 
-  @computed
-  get selectedMonth(): number {
-    return moment().month();
-  }
-
   @action.bound
   onDateChange(date: any) {
-    this.routingStore.push('/liabilities/detail');
+    this.routingStore.push('/personal-bill/detail');
     this.selectedValue = date;
   }
 }
