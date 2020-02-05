@@ -24,6 +24,22 @@ export default class HomeHeader extends React.Component<
   HomeHeaderProps,
   HomeHeaderState
 > {
+  componentDidMount() {
+    const tradingViewContainer = document.getElementById(
+      'trading-view-container',
+    )!;
+    const tradingViewScript = document.getElementById('trading-view-script')!;
+    tradingViewContainer.appendChild(tradingViewScript);
+  }
+
+  componentWillUnmount() {
+    const tradingViewContainer = document.getElementById(
+      'trading-view-container',
+    )!;
+    const tradingViewScript = document.getElementById('trading-view-script')!;
+    tradingViewContainer.removeChild(tradingViewScript);
+  }
+
   state = {
     rateSyncing: false,
     editing: false,
@@ -78,7 +94,10 @@ export default class HomeHeader extends React.Component<
               </Button>
             ) : null}
           </Col>
-          <Col className="exchange-rate" offset={14} span={6}>
+          <Col span={14}>
+            <div id="trading-view-container"></div>
+          </Col>
+          <Col className="exchange-rate" span={6}>
             <IconFont type="icon-exchange-rate" />
             {editing ? (
               <InputNumber

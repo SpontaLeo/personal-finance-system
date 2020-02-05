@@ -23,6 +23,58 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script
+      id="trading-view-script"
+      style="height: 0"
+      type="text/javascript"
+      src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
+      async
+    >
+      {
+        "symbols": [
+          {
+            "description": "比特币USDT",
+            "proName": "BINANCE:BTCUSDT"
+          },
+          {
+            "description": "汇率",
+            "proName": "FX_IDC:USDCNY"
+          },
+          {
+            "description": "原油",
+            "proName": "TVC:USOIL"
+          },
+          {
+            "description": "黄金",
+            "proName": "FOREXCOM:XAUUSD"
+          },
+          {
+            "description": "上证综指",
+            "proName": "SSE:000001"
+          },
+          {
+            "description": "标普500",
+            "proName": "TVC:SPX"
+          },
+          {
+            "description": "道琼斯指数",
+            "proName": "DJCFD:DJI"
+          },
+          {
+            "description": "纳斯达克指数",
+            "proName": "NASDAQ:IXIC"
+          },
+          {
+            "description": "恒生指数",
+            "proName": "HSI:HSI"
+          }
+        ],
+        "colorTheme": "light",
+        "isTransparent": true,
+        "displayMode": "regular",
+        "locale": "zh_CN"
+      }
+    </script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
