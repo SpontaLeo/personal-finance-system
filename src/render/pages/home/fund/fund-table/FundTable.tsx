@@ -44,12 +44,18 @@ const defaultColumns: TableColumns = [
     dataIndex: 'pe',
     key: 'pe',
     align: 'center',
+    render: (text, record: FundModel) => (
+      <span>{record.pe !== 0 ? record.pe.toFixed(2) : '/'}</span>
+    ),
   },
   {
     title: '市净率(PB)',
     dataIndex: 'pb',
     key: 'pb',
     align: 'center',
+    render: (text, record: FundModel) => (
+      <span>{record.pe !== 0 ? record.pb.toFixed(2) : '/'}</span>
+    ),
   },
   {
     title: '股息率(%)',
@@ -57,7 +63,9 @@ const defaultColumns: TableColumns = [
     key: 'dividendYieldRatio',
     align: 'center',
     render: (text, record: FundModel) => (
-      <span>{record.dividendYieldRatio.toFixed(2)}</span>
+      <span>
+        {record.dividendYieldRatio ? record.dividendYieldRatio.toFixed(2) : '/'}
+      </span>
     ),
   },
   {
@@ -65,7 +73,9 @@ const defaultColumns: TableColumns = [
     dataIndex: 'ep',
     key: 'ep',
     align: 'center',
-    render: (text, record: FundModel) => <span>{record.ep.toFixed(2)}</span>,
+    render: (text, record: FundModel) => (
+      <span>{record.ep ? record.ep.toFixed(2) : '/'}</span>
+    ),
   },
   {
     title: '备注',
@@ -73,17 +83,23 @@ const defaultColumns: TableColumns = [
     key: 'remark',
     align: 'center',
     render: (text, record: FundModel) => (
-      <Popover
-        content={record.remark}
-        trigger="click"
-        overlayStyle={{
-          width: '70vw',
-        }}
-      >
-        <Button type="link">
-          <Icon type="eye" />
-        </Button>
-      </Popover>
+      <span>
+        {record.remark !== '' ? (
+          <Popover
+            content={record.remark}
+            trigger="click"
+            overlayStyle={{
+              width: '70vw',
+            }}
+          >
+            <Button type="link">
+              <Icon type="eye" />
+            </Button>
+          </Popover>
+        ) : (
+          '/'
+        )}
+      </span>
     ),
   },
 ];

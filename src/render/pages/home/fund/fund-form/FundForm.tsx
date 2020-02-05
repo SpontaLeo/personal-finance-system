@@ -41,7 +41,7 @@ enum FundItemField {
 }
 
 export type FundItemFieldValues = {
-  date: string;
+  date: moment.Moment;
   target: string;
   amount: number;
   action: 'buy' | 'sell';
@@ -170,13 +170,19 @@ class OriginForm extends React.Component<FundFormProps> {
               style={{ width: '100%' }}
               size="small"
               min={0}
+              step={0.01}
               onChange={this.onPEChange}
             />,
           )}
         </FormItem>
         <FormItem {...formItemStyle} label="市净率(PB)">
           {getFieldDecorator('pb')(
-            <InputNumber style={{ width: '100%' }} size="small" min={0} />,
+            <InputNumber
+              style={{ width: '100%' }}
+              size="small"
+              min={0}
+              step={0.01}
+            />,
           )}
         </FormItem>
         <FormItem {...formItemStyle} label="股息率(%)">

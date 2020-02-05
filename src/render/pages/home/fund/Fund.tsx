@@ -18,21 +18,20 @@ interface FundProps {
 export default class Fund extends React.Component<FundProps> {
   createFundItem = async (values: FundItemFieldValues) => {
     const fundStore = this.props.fundStore!;
-    fundStore.createFundItem(
-      new FundModel({
-        date: values.date,
-        target: values.target,
-        amount: values.amount,
-        action: values.action,
-        price: values.price,
-        pe: values.pe ? values.pe : 0,
-        pb: values.pb ? values.pb : 0,
-        dividendYieldRatio: values.dividendYieldRatio
-          ? values.dividendYieldRatio
-          : 0,
-        remark: values.remark ? values.remark : '',
-      }),
-    );
+
+    fundStore.createFundItem({
+      date: values.date.format('YYYY-MM-DD'),
+      target: values.target,
+      amount: values.amount,
+      action: values.action,
+      price: values.price,
+      pe: values.pe ? values.pe : 0,
+      pb: values.pb ? values.pb : 0,
+      dividendYieldRatio: values.dividendYieldRatio
+        ? values.dividendYieldRatio
+        : 0,
+      remark: values.remark ? values.remark : '',
+    });
   };
 
   render() {

@@ -1,5 +1,6 @@
 import { action, observable } from 'mobx';
 
+import { FundItem } from '../../shared/interfaces/fund';
 import FundModel from '../models/FundModel';
 import { ItemActionType } from '../constants/interface';
 import moment from 'moment';
@@ -51,10 +52,23 @@ export default class FundStore {
   @action.bound
   closeModal() {
     this.fundModalVisible = false;
+    this.fundModalMode = ItemActionType.CREATE;
   }
 
   @action.bound
-  createFundItem(fundItem: FundModel) {
-    this.investmentRecordList.push(fundItem);
+  createFundItem(fundItem: Partial<FundItem>) {
+    this.investmentRecordList.push(
+      new FundModel(
+        Object.assign(fundItem, {
+          id: 'dffdf',
+          createdAt: moment().toString(),
+          updatedAt: moment().toString(),
+        }) as FundItem,
+      ),
+    );
+    this.closeModal();
   }
+
+  @action.bound
+  updateFundItem(fundItem: FundModel) {}
 }
