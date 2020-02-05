@@ -8,4 +8,10 @@
 
 .ant-layout-footer {
   text-align: center;
+  padding: 1em;
+}
+
+.ant-layout-sider-children {
+  height: calc(100vh - 48px);
+  overflow: auto;
 }

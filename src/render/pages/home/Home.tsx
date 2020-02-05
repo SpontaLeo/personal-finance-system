@@ -4,12 +4,13 @@ import { ChildRoute, HomeMenu } from '../../constants/Route';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 
+import HomeHeader from '../home-header/HomeHeader';
 import HomeStore from '../../stores/HomeStore';
 import { Layout } from 'antd';
 import React from 'react';
 import SiderMenu from './sider-menu/SiderMenu';
 
-const { Sider, Content, Footer } = Layout;
+const { Sider, Header, Content, Footer } = Layout;
 
 interface HomeProps {
   homeStore?: HomeStore;
@@ -22,12 +23,9 @@ interface HomeState {
 @inject('homeStore')
 @observer
 export default class Home extends React.Component<HomeProps, HomeState> {
-  constructor(props: HomeProps) {
-    super(props);
-    this.state = {
-      collapsed: false,
-    };
-  }
+  state = {
+    collapsed: false,
+  };
 
   onCollapseChange = () => {
     this.setState({
@@ -55,7 +53,10 @@ export default class Home extends React.Component<HomeProps, HomeState> {
           <SiderMenu />
         </Sider>
         <Layout>
-          <Content className="content">
+          <Header>
+            <HomeHeader />
+          </Header>
+          <Content>
             <Switch>
               <Route
                 path="/"
