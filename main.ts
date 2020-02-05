@@ -10,7 +10,7 @@ isDev && require('electron-debug')({ enabled: true, showDevTools: false });
 function createDevTools() {
   const {
     default: installExtension,
-    REACT_DEVELOPER_TOOLS
+    REACT_DEVELOPER_TOOLS,
   } = require('electron-devtools-installer');
   // 安装devtron
   const devtronExtension = require('devtron');
@@ -21,13 +21,13 @@ function createDevTools() {
 
 function createWindow() {
   // 创建浏览器窗口。
-  win = new BrowserWindow({ 
-    width: 1200, 
-    height: 720,
+  win = new BrowserWindow({
+    minWidth: 640,
+    minHeight: 480,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
-    }
-   });
+      preload: path.join(__dirname, 'preload.js'),
+    },
+  });
 
   // 然后加载应用的 index.html。
   win.loadURL('http://localhost:3000');

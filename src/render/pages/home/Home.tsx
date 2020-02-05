@@ -4,7 +4,7 @@ import { ChildRoute, HomeMenu } from '../../constants/Route';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 
-import HomeHeader from '../home-header/HomeHeader';
+import HomeHeader from './home-header/HomeHeader';
 import HomeStore from '../../stores/HomeStore';
 import { Layout } from 'antd';
 import React from 'react';
@@ -46,7 +46,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
             overflow: 'auto',
           }}
           collapsible
-          breakpoint="sm"
+          breakpoint="md"
           collapsed={collapsed}
           onCollapse={this.onCollapseChange}
         >
