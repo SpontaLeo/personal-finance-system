@@ -7,6 +7,7 @@ import { inject, observer } from 'mobx-react';
 import FundModel from '../../../models/FundModel';
 import FundStore from '../../../stores/FundStore';
 import FundTable from './fund-table/FundTable';
+import { ItemActionType } from '../../../constants/interface';
 import React from 'react';
 
 interface FundProps {
@@ -42,6 +43,7 @@ export default class Fund extends React.Component<FundProps> {
       fundModalVisible,
       fundModalMode,
       closeModal,
+      deleteFundItem,
     } = fundStore;
 
     return (
@@ -72,10 +74,13 @@ export default class Fund extends React.Component<FundProps> {
               align: 'center',
               render: (text, record: FundModel) => (
                 <span>
-                  <Button type="link">
+                  <Button
+                    type="link"
+                    onClick={e => openModal(ItemActionType.MODIFY, record)}
+                  >
                     <Icon type="edit" />
                   </Button>
-                  <Button type="link">
+                  <Button type="link" onClick={e => deleteFundItem(record.id)}>
                     <Icon type="delete" />
                   </Button>
                 </span>

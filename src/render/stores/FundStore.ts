@@ -3,6 +3,7 @@ import { action, observable } from 'mobx';
 import { FundItem } from '../../shared/interfaces/fund';
 import FundModel from '../models/FundModel';
 import { ItemActionType } from '../constants/interface';
+import { generateUUID } from '../../shared/methods/index';
 import moment from 'moment';
 
 export default class FundStore {
@@ -21,7 +22,7 @@ export default class FundStore {
   constructor() {
     this.investmentRecordList = [
       new FundModel({
-        id: 'dddfsf-dfdfdf-sadfasf',
+        id: generateUUID(),
         date: moment().format('YYYY-MM-DD'),
         createdAt: moment().format('YYYY-MM-DD'),
         updatedAt: moment().format('YYYY-MM-DD'),
@@ -33,10 +34,9 @@ export default class FundStore {
         pb: 1.2,
         dividendYieldRatio: 10,
         remark:
-          '不知道说什么 不知道说什么 不知道说什么 不知道说什么 不知道说什么 不知道说什么 不知道说什么 不知道说什么 不知道说什么 不知道说什么 不知道说什么 不知道说什么 不知道说什么 不知道说什么 不知道说什么 不知道说什么 ',
+          '占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 ',
       }),
     ];
-    // this.investmentRecordList = [FundModel.mock()];
   }
 
   @action.bound
@@ -46,13 +46,16 @@ export default class FundStore {
   ) {
     this.fundModalVisible = true;
     this.fundModalMode = mode;
-    this.editingInvestmentRecord = selectedRecord;
+    selectedRecord && (this.editingInvestmentRecord = selectedRecord);
+    console.log(this.editingInvestmentRecord);
   }
 
   @action.bound
   closeModal() {
     this.fundModalVisible = false;
+    // dataInit
     this.fundModalMode = ItemActionType.CREATE;
+    this.editingInvestmentRecord = undefined;
   }
 
   @action.bound
@@ -60,7 +63,7 @@ export default class FundStore {
     this.investmentRecordList.push(
       new FundModel(
         Object.assign(fundItem, {
-          id: 'dffdf',
+          id: generateUUID(),
           createdAt: moment().toString(),
           updatedAt: moment().toString(),
         }) as FundItem,
@@ -71,4 +74,11 @@ export default class FundStore {
 
   @action.bound
   updateFundItem(fundItem: FundModel) {}
+
+  @action.bound
+  deleteFundItem(id: string) {
+    // 占位
+    const index = this.investmentRecordList.findIndex(e => e.id === id);
+    this.investmentRecordList.splice(index);
+  }
 }

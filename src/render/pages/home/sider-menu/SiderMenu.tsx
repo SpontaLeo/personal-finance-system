@@ -3,30 +3,30 @@ import './SiderMenu.scss';
 import { inject, observer } from 'mobx-react';
 
 import { HomeMenu } from '../../../constants/Route';
+import HomeStore from '../../../stores/HomeStore';
 import { IconFont } from '../../../common/components/icon-font';
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
 import React from 'react';
-import SiderMenuStore from '../../../stores/SiderMenuStore';
 
 const MenuItem = Menu.Item;
 
 interface SiderMenuProps {
-  siderMenuStore?: SiderMenuStore;
+  homeStore?: HomeStore;
 }
 
-@inject('siderMenuStore')
+@inject('homeStore')
 @observer
 export default class SiderMenu extends React.Component<SiderMenuProps> {
   render() {
-    const siderMenuStore = this.props.siderMenuStore!;
+    const homeStore = this.props.homeStore!;
 
     return (
       <Menu
         theme="light"
         mode="inline"
         defaultSelectedKeys={[HomeMenu[0].key]}
-        selectedKeys={[siderMenuStore.currentRoute]}
+        selectedKeys={[homeStore.menuKey]}
       >
         {HomeMenu.map(menu => {
           return (

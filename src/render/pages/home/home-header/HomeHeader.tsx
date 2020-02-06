@@ -24,11 +24,18 @@ export default class HomeHeader extends React.Component<
   HomeHeaderProps,
   HomeHeaderState
 > {
+  state = {
+    rateSyncing: false,
+    editing: false,
+    editingValue: undefined,
+  };
+
   componentDidMount() {
     const tradingViewContainer = document.getElementById(
       'trading-view-container',
     )!;
     const tradingViewScript = document.getElementById('trading-view-script')!;
+
     tradingViewContainer.appendChild(tradingViewScript);
   }
 
@@ -39,12 +46,6 @@ export default class HomeHeader extends React.Component<
     const tradingViewScript = document.getElementById('trading-view-script')!;
     tradingViewContainer.removeChild(tradingViewScript);
   }
-
-  state = {
-    rateSyncing: false,
-    editing: false,
-    editingValue: undefined,
-  };
 
   syncRate = async () => {
     const { queryExchangeRate } = this.props.homeStore!;
