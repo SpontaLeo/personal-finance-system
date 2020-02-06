@@ -1,8 +1,25 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Tray, shell, Menu, ipcMain } = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
 
 let win;
+
+// 创建任务栏图标、菜单
+const tray = new Tray('./src/assets/images/logo.png');
+const trayContextMenu = Menu.buildFromTemplate([
+  {
+    label: '打开',
+    click: () => {
+      win.show();
+    },
+  },
+  {
+    label: '退出',
+    click: () => {
+      app.quit();
+    },
+  },
+]);
 
 // 利用electron-debug，添加和Chrome类似的快捷键
 isDev && require('electron-debug')({ enabled: true, showDevTools: false });
@@ -22,6 +39,7 @@ function createDevTools() {
 function createWindow() {
   // 创建浏览器窗口。
   win = new BrowserWindow({
+    icon: './src/assets/images/logo.png',
     minWidth: 640,
     minHeight: 480,
     webPreferences: {
@@ -54,4 +72,12 @@ app.on('activate', () => {
   if (win === null) {
     createWindow();
   }
+});
+
+tray.setToolTip('个人财务系统');
+tray.on('click', () => {
+  win.show();
+});
+tray.on('right-click', () => {
+  tray.popUpContextMenu(trayContextMenu);
 });
