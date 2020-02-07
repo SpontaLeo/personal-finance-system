@@ -1,5 +1,4 @@
 const { app, BrowserWindow } = require('electron');
-// Tray, Menu, ipcMain
 const isDev = require('electron-is-dev');
 const path = require('path');
 
@@ -43,31 +42,6 @@ function createWindow() {
 app.on('ready', () => {
   createWindow();
   isDev && createDevTools();
-
-  // 创建任务栏图标、菜单
-  // const tray = new Tray('./src/assets/images/logo.ico');
-  // const trayContextMenu = Menu.buildFromTemplate([
-  //   {
-  //     label: '打开',
-  //     click: () => {
-  //       win.show();
-  //     },
-  //   },
-  //   {
-  //     label: '退出',
-  //     click: () => {
-  //       app.quit();
-  //     },
-  //   },
-  // ]);
-
-  // tray.setToolTip('个人财务系统');
-  // tray.on('click', () => {
-  //   win.show();
-  // });
-  // tray.on('right-click', () => {
-  //   tray.popUpContextMenu(trayContextMenu);
-  // });
 });
 
 // 当全部窗口关闭时退出。

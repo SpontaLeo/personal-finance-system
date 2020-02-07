@@ -36,7 +36,11 @@
   "scripts": {
     "start": "concurrently \"npm run start:react\" \"npm run start:electron\"",
     "start:react": "cross-env BROWSER=none react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "npm run build:copy && npm run pack",
+    "build:react": "react-app-rewired build",
+    "build.copy": "npm run build:react && npm run copy:electron",
+    "pack": "electron-builder",
+    "copy:electron": "cp -r ./"
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
     "start:electron": "wait-on http://localhost:3000 && electron ."
