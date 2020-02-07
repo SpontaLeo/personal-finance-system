@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react';
 
 import { HomeMenu } from '../../../common/constants/Route';
 import HomeStore from '../../../stores/HomeStore';
-import { IconFont } from '../../../common/components/icon-font';
+import { IconFont } from '../../../common/components';
 import { Link } from 'react-router-dom';
 import { Menu } from 'antd';
 import React from 'react';

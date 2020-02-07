@@ -1,5 +1,6 @@
 const electron = (window as any).electron;
 
+// renderer直接引入有bug，导出供renderer使用
 const {
   app,
   autoUpdater,

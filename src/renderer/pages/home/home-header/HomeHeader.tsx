@@ -4,7 +4,7 @@ import { Button, Col, Icon, InputNumber, Row } from 'antd';
 import { inject, observer } from 'mobx-react';
 
 import HomeStore from '../../../stores/HomeStore';
-import { IconFont } from '../../../common/components/icon-font';
+import { IconFont } from '../../../common/components';
 import React from 'react';
 import { goBack } from '../../../common/methods/index';
 

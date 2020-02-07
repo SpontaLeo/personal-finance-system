@@ -1,4 +1,4 @@
-import { routingStore } from '../../stores/index';
+import { routingStore } from '../../stores';
 
 export function goBack() {
   routingStore.goBack();
