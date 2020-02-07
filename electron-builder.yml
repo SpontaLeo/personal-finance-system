@@ -1,0 +1,5 @@
+appId: com.nayuta.personal-finance-system
+productName: 个人财务系统
+extends: null
+directories:
+  buildResources: resources

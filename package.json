@@ -3,21 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "main": "app/electron.js",
+  "homepage": ".",
   "dependencies": {
+    "babel-plugin-import": "^1.13.0",
     "electron-is-dev": "^1.1.0"
-  },
-  "build": {
-    "productName": "personal-finance-system",
-    "extends": null,
-    "files": [
-      "build/**/*"
-    ],
-    "extraMetadata": {
-      "main": "build/electron.js"
-    },
-    "directories": {
-      "buildResources": "resources"
-    }
   },
   "scripts": {
     "start": "concurrently \"npm run start:react\" \"npm run start:electron\"",
@@ -25,7 +14,7 @@
     "build": "npm run build:copy && npm run pack",
     "build:react": "react-app-rewired build",
     "build:copy": "npm run build:react && npm run copy:electron",
-    "pack": "electron-builder",
+    "pack": "electron-builder --config electron-builder.yml",
     "copy:electron": "cp -r ./app/. ./build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
