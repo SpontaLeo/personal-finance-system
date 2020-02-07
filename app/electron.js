@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
 
@@ -33,7 +33,8 @@ function createWindow() {
     minWidth: 640,
     minHeight: 480,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration: true,
+      preload: path.join(__dirname, '../public/renderer.js'),
     },
   });
 
@@ -62,4 +63,8 @@ app.on('activate', () => {
   if (win === null) {
     createWindow();
   }
+});
+
+ipcMain.on('test', (event, arg) => {
+  event.sender.send('test-reply', 'test successfully!');
 });

@@ -47,7 +47,6 @@ export default class FundStore {
     this.fundModalVisible = true;
     this.fundModalMode = mode;
     selectedRecord && (this.editingInvestmentRecord = selectedRecord);
-    console.log(this.editingInvestmentRecord);
   }
 
   @action.bound
@@ -69,6 +68,7 @@ export default class FundStore {
         }) as FundItem,
       ),
     );
+
     this.closeModal();
   }
 

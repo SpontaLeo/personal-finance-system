@@ -2,6 +2,7 @@ import { action, computed, observable } from 'mobx';
 
 import CommonApi from '../../shared/apis/CommonApi';
 import { commonApi } from '../../shared/apis/index';
+import { ipcRenderer } from '../api/electron';
 
 export default class BaseStore {
   commonApi: CommonApi = commonApi;
@@ -19,6 +20,14 @@ export default class BaseStore {
 
   constructor() {
     this.queryExchangeRate();
+  }
+
+  @action.bound
+  sendMessage() {
+    ipcRenderer.send('test');
+    ipcRenderer.on('test-reply', (event: any, arg: any) => {
+      console.log(arg);
+    });
   }
 
   @action.bound
