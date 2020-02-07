@@ -1,8 +1,8 @@
 import { action, computed, observable } from 'mobx';
 
-import CommonApi from '../../shared/apis/CommonApi';
-import { commonApi } from '../../shared/apis/index';
-import { ipcRenderer } from '../api/electron';
+import CommonApi from '../apis/CommonApi';
+import { commonApi } from '../apis/index';
+import { ipcRenderer } from '../apis/electron';
 
 export default class BaseStore {
   commonApi: CommonApi = commonApi;

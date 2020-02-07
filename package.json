@@ -2,6 +2,10 @@
   "name": "personal-finance-system",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Nayuta",
+    "email": "spontaleo@gmail.com"
+  },
   "main": "app/electron.js",
   "homepage": ".",
   "dependencies": {
