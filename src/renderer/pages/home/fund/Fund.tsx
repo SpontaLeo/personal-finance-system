@@ -7,7 +7,7 @@ import { inject, observer } from 'mobx-react';
 import FundModel from '../../../models/FundModel';
 import FundStore from '../../../stores/FundStore';
 import FundTable from './fund-table/FundTable';
-import { ItemActionType } from '../../../constants/interface';
+import { ItemActionType } from '../../../common/constants/interface';
 import React from 'react';
 
 interface FundProps {

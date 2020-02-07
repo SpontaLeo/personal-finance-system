@@ -1,6 +1,6 @@
 import './Home.scss';
 
-import { ChildRoute, HomeMenu } from '../../constants/Route';
+import { ChildRoute, HomeMenu } from '../../common/constants/Route';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 

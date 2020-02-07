@@ -2,8 +2,8 @@ import { action, observable } from 'mobx';
 
 import { FundItem } from '../../shared/interfaces/fund';
 import FundModel from '../models/FundModel';
-import { ItemActionType } from '../constants/interface';
-import { generateUUID } from '../../shared/methods/index';
+import { ItemActionType } from '../common/constants/interface';
+import { generateUUID } from '../../shared/common/methods/index';
 import moment from 'moment';
 
 export default class FundStore {

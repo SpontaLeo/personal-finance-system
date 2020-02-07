@@ -1,4 +1,4 @@
-import { ChildRoute, HomeMenu } from '../constants/Route';
+import { ChildRoute, HomeMenu } from '../common/constants/Route';
 
 import BaseStore from './BaseStore';
 import { RouterStore } from 'mobx-react-router';

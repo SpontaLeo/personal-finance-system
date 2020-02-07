@@ -2,7 +2,7 @@ import './SiderMenu.scss';
 
 import { inject, observer } from 'mobx-react';
 
-import { HomeMenu } from '../../../constants/Route';
+import { HomeMenu } from '../../../common/constants/Route';
 import HomeStore from '../../../stores/HomeStore';
 import { IconFont } from '../../../common/components/icon-font';
 import { Link } from 'react-router-dom';

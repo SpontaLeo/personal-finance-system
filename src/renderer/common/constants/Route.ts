@@ -1,9 +1,9 @@
-import Bill from '../pages/home/personal-bill/bill/Bill';
-import DigitalCurrency from '../pages/home/digital-currency/DigitalCurrency';
-import Fund from '../pages/home/fund/Fund';
-import Liabilities from '../pages/home/liabilities/Liabilities';
-import Liability from '../pages/home/liabilities/liability/Liability';
-import PersonalBill from '../pages/home/personal-bill/PersonalBill';
+import Bill from '../../pages/home/personal-bill/bill/Bill';
+import DigitalCurrency from '../../pages/home/digital-currency/DigitalCurrency';
+import Fund from '../../pages/home/fund/Fund';
+import Liabilities from '../../pages/home/liabilities/Liabilities';
+import Liability from '../../pages/home/liabilities/liability/Liability';
+import PersonalBill from '../../pages/home/personal-bill/PersonalBill';
 
 interface RouteItem {
   key: string;
