@@ -19,7 +19,7 @@ export const HomeMenu: RouteItem[] = [
     key: 'currency',
     to: '/digital-currency',
     title: '数字货币',
-    iconType: 'icon-digital-currency',
+    iconType: 'icon-btc',
     component: DigitalCurrency,
   },
   {
