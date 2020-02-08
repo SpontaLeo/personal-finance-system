@@ -3,6 +3,7 @@ import { action, computed, observable } from 'mobx';
 import CommonApi from '../apis/CommonApi';
 import { commonApi } from '../apis/index';
 import { ipcRenderer } from '../common/electron';
+import uuid from 'uuid';
 
 export default class BaseStore {
   commonApi: CommonApi = commonApi;
@@ -19,12 +20,12 @@ export default class BaseStore {
   }
 
   constructor() {
+    console.log('baseStore constructor');
     this.queryExchangeRate();
   }
 
-  @action.bound
   sendMessage() {
-    ipcRenderer.send('test');
+    ipcRenderer.send('test', uuid());
     ipcRenderer.on('test-reply', (event: any, arg: any) => {
       console.log(arg);
     });
