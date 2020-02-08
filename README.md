@@ -1,8 +1,9 @@
-# PersonalTradingSystem
+# PersonalFinanceSystem
 
-A project used to measure trade odds and record the report.
+A tool for managing personal finances.
 
 ## 数字货币
+
 按照账户类型分——现货/期货
 
 - [ ] 现货账户资产数据录入(okex, huobi, binance)
