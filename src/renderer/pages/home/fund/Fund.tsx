@@ -1,6 +1,6 @@
 import './Fund.scss';
 
-import { Button, Icon, Modal } from 'antd';
+import { Button, Divider, Icon, Modal } from 'antd';
 import FundForm, { FundItemFieldValues } from './fund-form/FundForm';
 import { inject, observer } from 'mobx-react';
 
@@ -95,12 +95,17 @@ export default class Fund extends React.Component<FundProps> {
               render: (text, record: FundModel) => (
                 <span>
                   <Button
+                    className="update-btn"
                     type="link"
                     onClick={e => openModal(ItemActionType.MODIFY, record)}
                   >
                     <Icon type="edit" />
                   </Button>
-                  <Button type="link" onClick={e => deleteFundItem(record.id)}>
+                  <Button
+                    className="delete-btn"
+                    type="link"
+                    onClick={e => deleteFundItem(record.id)}
+                  >
                     <Icon type="delete" />
                   </Button>
                 </span>
