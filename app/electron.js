@@ -31,6 +31,8 @@ function createWindow() {
   // 创建浏览器窗口。
   win = new BrowserWindow({
     icon: './src/assets/images/logo.ico',
+    width: 960,
+    height: 720,
     minWidth: 640,
     minHeight: 480,
     webPreferences: {

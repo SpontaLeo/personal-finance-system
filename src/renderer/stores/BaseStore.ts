@@ -18,7 +18,6 @@ export default class BaseStore {
   }
 
   constructor() {
-    console.log('baseStore constructor');
     this.queryExchangeRate();
   }
 

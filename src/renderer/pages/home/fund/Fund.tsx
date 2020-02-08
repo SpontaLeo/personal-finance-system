@@ -1,6 +1,6 @@
 import './Fund.scss';
 
-import { Button, Divider, Icon, Modal } from 'antd';
+import { Button, Icon, Modal } from 'antd';
 import FundForm, { FundItemFieldValues } from './fund-form/FundForm';
 import { inject, observer } from 'mobx-react';
 
