@@ -9,6 +9,7 @@ import FundStore from '../../../stores/FundStore';
 import FundTable from './fund-table/FundTable';
 import { ItemActionType } from '../../../common/constants/interface';
 import React from 'react';
+import moment from 'moment';
 
 interface FundProps {
   fundStore?: FundStore;
@@ -21,7 +22,25 @@ export default class Fund extends React.Component<FundProps> {
     const fundStore = this.props.fundStore!;
 
     fundStore.createFundItem({
-      date: values.date.format('YYYY-MM-DD'),
+      date: moment(values.date).format('YYYY-MM-DD'),
+      target: values.target,
+      amount: values.amount,
+      action: values.action,
+      price: values.price,
+      pe: values.pe ? values.pe : 0,
+      pb: values.pb ? values.pb : 0,
+      dividendYieldRatio: values.dividendYieldRatio
+        ? values.dividendYieldRatio
+        : 0,
+      remark: values.remark ? values.remark : '',
+    });
+  };
+
+  updateFundItem = async (values: FundItemFieldValues) => {
+    const fundStore = this.props.fundStore!;
+
+    fundStore.updateFundItem({
+      date: moment(values.date).format('YYYY-MM-DD'),
       target: values.target,
       amount: values.amount,
       action: values.action,
@@ -44,6 +63,7 @@ export default class Fund extends React.Component<FundProps> {
       fundModalMode,
       closeModal,
       deleteFundItem,
+      editingInvestmentRecord,
     } = fundStore;
 
     return (
@@ -101,8 +121,9 @@ export default class Fund extends React.Component<FundProps> {
             onConfirm={
               fundModalMode === 'create'
                 ? this.createFundItem
-                : this.createFundItem
+                : this.updateFundItem
             }
+            initialValues={editingInvestmentRecord}
           />
         </Modal>
       </div>

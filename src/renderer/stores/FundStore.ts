@@ -73,7 +73,19 @@ export default class FundStore {
   }
 
   @action.bound
-  updateFundItem(fundItem: FundModel) {}
+  updateFundItem(fundItem: Partial<FundItem>) {
+    const index = this.investmentRecordList.findIndex(
+      record => record.id === this.editingInvestmentRecord!.id,
+    );
+    const updatedRecord = Object.assign(
+      this.editingInvestmentRecord!,
+      fundItem,
+    ) as FundModel;
+
+    this.investmentRecordList.splice(index, 1, updatedRecord);
+
+    this.closeModal();
+  }
 
   @action.bound
   deleteFundItem(id: string) {

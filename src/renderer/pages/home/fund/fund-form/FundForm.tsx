@@ -41,7 +41,7 @@ enum FundItemField {
 }
 
 export type FundItemFieldValues = {
-  date: moment.Moment;
+  date: string;
   target: string;
   amount: number;
   action: 'buy' | 'sell';
@@ -103,6 +103,7 @@ class OriginForm extends React.Component<FundFormProps> {
       <Form className="fund-form">
         <FormItem {...formItemStyle} label="日期">
           {getFieldDecorator('date', {
+            initialValue: moment(),
             rules: [{ required: true, message: '请选择日期' }],
           })(
             <DatePicker
@@ -237,12 +238,24 @@ const FundForm = Form.create<FundFormProps>({
 
     if (!!initialValues) {
       Object.keys(initialValues).forEach(k => {
-        values[k] = Form.createFormField({
-          value: initialValues[k],
-        });
+        const value = initialValues[k];
+        switch (k) {
+          case 'date':
+            values[k] = Form.createFormField({ value: moment(value) });
+            break;
+          case 'pe':
+            values[k] = Form.createFormField({ value });
+            values['ep'] = Form.createFormField({
+              value: value ? (1 / value) * 100 : '',
+            });
+            break;
+          default:
+            values[k] = Form.createFormField({ value });
+        }
       });
     }
 
+    console.log(values);
     return values;
   },
 })(OriginForm);

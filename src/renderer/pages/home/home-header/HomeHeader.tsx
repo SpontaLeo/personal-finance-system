@@ -81,7 +81,7 @@ export default class HomeHeader extends React.Component<
 
   render() {
     const homeStore = this.props.homeStore!;
-    const { showBack, rate, exchangeRate, sendMessage } = homeStore;
+    const { showBack, rate, exchangeRate } = homeStore;
     const { rateSyncing, editing } = this.state;
 
     return (
@@ -115,7 +115,6 @@ export default class HomeHeader extends React.Component<
             )}
             <Icon type="sync" onClick={this.syncRate} spin={rateSyncing} />
             <Icon onClick={this.editRate} type="edit" />
-            <Button onClick={sendMessage}>通信测试</Button>
           </Col>
         </Row>
       </div>

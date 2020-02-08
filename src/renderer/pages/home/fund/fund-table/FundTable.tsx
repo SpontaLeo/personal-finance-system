@@ -89,7 +89,7 @@ const defaultColumns: TableColumns = [
             content={record.remark}
             trigger="click"
             overlayStyle={{
-              width: '70vw',
+              maxWidth: '70vw',
             }}
           >
             <Button type="link">
