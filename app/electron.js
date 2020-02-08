@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
-const log = require('electron-log');
+// const log = require('electron-log');
 
 let win;
 
@@ -67,5 +67,6 @@ app.on('activate', () => {
 });
 
 ipcMain.on('test', (event, arg) => {
-  log.info(`received ${arg}`);
+  console.log(`received ${arg}`);
+  // log.info(`received ${arg}`);
 });

@@ -3,4 +3,5 @@ productName: 个人财务系统
 copyright: Copyright @ 2020 Nayuta
 extends: null
 directories:
+  output: build-main
   buildResources: resources

@@ -10,7 +10,7 @@
 
 # production
 /build
-/build-electron
+/build-main
 
 # misc
 .DS_Store
