@@ -64,6 +64,12 @@ export default class HomeHeader extends React.Component<
     });
   };
 
+  cancelEdit = () => {
+    this.setState({
+      editing: false,
+    });
+  };
+
   onRateChange = (value: number | undefined) => {
     this.setState({
       editingValue: value,
@@ -114,7 +120,11 @@ export default class HomeHeader extends React.Component<
               <span> USD/CNY: {exchangeRate} </span>
             )}
             <Icon type="sync" onClick={this.syncRate} spin={rateSyncing} />
-            <Icon onClick={this.editRate} type="edit" />
+            {editing ? (
+              <Icon onClick={this.cancelEdit} type="close" />
+            ) : (
+              <Icon onClick={this.editRate} type="edit" />
+            )}
           </Col>
         </Row>
       </div>

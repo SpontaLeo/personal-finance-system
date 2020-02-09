@@ -19,8 +19,8 @@ export default class LiabilitiesStore {
   }
 
   @action.bound
-  onDateChange(date: any) {
+  onDateChange(date?: moment.Moment) {
     this.routingStore.push('/liabilities/detail');
-    this.selectedValue = date;
+    this.selectedValue = date!;
   }
 }

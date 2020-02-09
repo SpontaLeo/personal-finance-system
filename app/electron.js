@@ -18,6 +18,7 @@ isDev && require('electron-debug')({ enabled: true, showDevTools: false });
 function createDevTools() {
   const {
     default: installExtension,
+    MOBX_DEVTOOLS,
     REACT_DEVELOPER_TOOLS,
   } = require('electron-devtools-installer');
   // 安装devtron
@@ -25,6 +26,7 @@ function createDevTools() {
   devtronExtension.install();
   // 安装React开发者工具
   installExtension(REACT_DEVELOPER_TOOLS);
+  installExtension(MOBX_DEVTOOLS);
 }
 
 function createWindow() {
@@ -33,8 +35,8 @@ function createWindow() {
     icon: './src/assets/images/logo.ico',
     width: 960,
     height: 720,
-    minWidth: 640,
-    minHeight: 480,
+    minWidth: 800,
+    minHeight: 600,
     webPreferences: {
       nodeIntegration: true,
       preload: path.join(__dirname, '../preload.js'),

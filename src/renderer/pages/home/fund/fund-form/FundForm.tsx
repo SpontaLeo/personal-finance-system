@@ -254,8 +254,7 @@ const FundForm = Form.create<FundFormProps>({
         }
       });
     }
-
-    console.log(values);
+    
     return values;
   },
 })(OriginForm);
