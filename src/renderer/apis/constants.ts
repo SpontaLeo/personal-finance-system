@@ -1,3 +1,4 @@
+// nowApi 汇率查询接口
 const APPKEY = 48510;
 const SIGN = 'cf1f012373a1fc55b8ea6c92fe063edd';
 

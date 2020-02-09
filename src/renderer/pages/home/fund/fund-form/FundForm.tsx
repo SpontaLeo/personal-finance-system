@@ -213,7 +213,7 @@ class OriginForm extends React.Component<FundFormProps> {
         </FormItem>
         <Divider />
         <FormItem>
-          <div className="fund-form-buttons">
+          <div className="form-buttons">
             <Button className="cancel-btn" onClick={this.cancel}>
               取消
             </Button>
@@ -254,7 +254,7 @@ const FundForm = Form.create<FundFormProps>({
         }
       });
     }
-    
+
     return values;
   },
 })(OriginForm);

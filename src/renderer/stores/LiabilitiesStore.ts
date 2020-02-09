@@ -11,16 +11,16 @@ export default class LiabilitiesStore {
   }
 
   @observable
-  selectedValue: moment.Moment = moment();
+  selectedDate: moment.Moment = moment();
 
   @computed
   get selectedMonth(): number {
-    return moment().month();
+    return this.selectedDate.month();
   }
 
   @action.bound
-  onDateChange(date?: moment.Moment) {
+  onSelectDate(date?: moment.Moment) {
     this.routingStore.push('/liabilities/detail');
-    this.selectedValue = date!;
+    this.selectedDate = date!;
   }
 }

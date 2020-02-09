@@ -59,7 +59,7 @@ export default class Fund extends React.Component<FundProps> {
     const {
       investmentRecordList,
       openModal,
-      fundModalVisible,
+      modalVisible,
       fundModalMode,
       closeModal,
       deleteFundItem,
@@ -116,7 +116,7 @@ export default class Fund extends React.Component<FundProps> {
         <Modal
           maskClosable={false}
           title={fundModalMode === 'create' ? '新增定投记录' : '编辑定投记录'}
-          visible={fundModalVisible}
+          visible={modalVisible}
           onCancel={closeModal}
           footer={null}
           destroyOnClose={true}

@@ -14,7 +14,7 @@ export default class FundStore {
   editingInvestmentRecord?: FundModel = undefined;
 
   @observable
-  fundModalVisible: boolean = false;
+  modalVisible: boolean = false;
 
   @observable
   fundModalMode: ItemActionType = ItemActionType.CREATE;
@@ -44,14 +44,14 @@ export default class FundStore {
     mode: ItemActionType = ItemActionType.CREATE,
     selectedRecord?: FundModel,
   ) {
-    this.fundModalVisible = true;
+    this.modalVisible = true;
     this.fundModalMode = mode;
     selectedRecord && (this.editingInvestmentRecord = selectedRecord);
   }
 
   @action.bound
   closeModal() {
-    this.fundModalVisible = false;
+    this.modalVisible = false;
     // dataInit
     this.fundModalMode = ItemActionType.CREATE;
     this.editingInvestmentRecord = undefined;
@@ -89,7 +89,6 @@ export default class FundStore {
 
   @action.bound
   deleteFundItem(id: string) {
-    // 占位
     const index = this.investmentRecordList.findIndex(e => e.id === id);
     this.investmentRecordList.splice(index);
   }
