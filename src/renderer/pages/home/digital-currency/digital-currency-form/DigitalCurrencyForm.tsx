@@ -86,6 +86,7 @@ class OriginForm extends React.Component<DigitalCurrencyFormProps> {
               style={{ width: '80%' }}
               size="small"
               min={0}
+              precision={2}
               formatter={value =>
                 `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
               }
@@ -106,6 +107,7 @@ class OriginForm extends React.Component<DigitalCurrencyFormProps> {
               style={{ width: '80%' }}
               size="small"
               min={0}
+              precision={2}
               formatter={value =>
                 `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
               }
@@ -126,6 +128,7 @@ class OriginForm extends React.Component<DigitalCurrencyFormProps> {
               style={{ width: '80%' }}
               size="small"
               min={0}
+              precision={2}
               formatter={value =>
                 `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
               }
@@ -146,6 +149,7 @@ class OriginForm extends React.Component<DigitalCurrencyFormProps> {
               style={{ width: '80%' }}
               size="small"
               min={0}
+              precision={2}
               formatter={value =>
                 `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
               }

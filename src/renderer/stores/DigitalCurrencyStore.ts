@@ -1,11 +1,12 @@
 import { action, computed, observable } from 'mobx';
 
+import BaseStore from './BaseStore';
 import { DigitalCurrencyItem } from '../../shared/interfaces/DigitalCurrenty';
 import DigitalCurrencyModel from '../models/DigitalCurrencyModel';
 import { generateUUID } from '../../shared/common/methods/index';
 import moment from 'moment';
 
-export default class DigitalCurrencyStore {
+export default class DigitalCurrencyStore extends BaseStore {
   @observable
   digitalCurrencyData: { [key: string]: DigitalCurrencyModel } = {
     '2020-01': {

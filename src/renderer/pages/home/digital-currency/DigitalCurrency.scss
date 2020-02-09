@@ -1,0 +1,11 @@
+.account-overview {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  .account {
+    .amount {
+      padding-left: 1em;
+    }
+  }
+}

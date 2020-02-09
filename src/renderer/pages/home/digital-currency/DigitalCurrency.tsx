@@ -1,11 +1,13 @@
 import './DigitalCurrency.scss';
 
-import { Calendar, Modal } from 'antd';
+import { Calendar, Col, Modal, Row, Statistic } from 'antd';
 import { inject, observer } from 'mobx-react';
 
 import { DigitalCurrencyFieldValues } from './digital-currency-form/DigitalCurrencyForm';
 import DigitalCurrencyForm from './digital-currency-form/DigitalCurrencyForm';
+import DigitalCurrencyModel from '../../../models/DigitalCurrencyModel';
 import DigitalCurrencyStore from '../../../stores/DigitalCurrencyStore';
+import { IconFont } from '../../../common/components/icon-font/index';
 import React from 'react';
 import moment from 'moment';
 
@@ -29,6 +31,41 @@ export default class DigitalCurrency extends React.Component<
     });
   };
 
+  monthCellRender = (date: moment.Moment) => {
+    const digitalCurrencyStore = this.props.digitalCurrencyStore!;
+
+    const matchedData: DigitalCurrencyModel | null =
+      digitalCurrencyStore.digitalCurrencyData[date.format('YYYY-MM')];
+
+    return matchedData ? (
+      <Row>
+        <Col span={12}>
+          <Statistic title="总计（USD）" value={matchedData.total.toFixed(2)} />
+        </Col>
+        <Col span={12}>
+          <ul className="account-overview">
+            <li className="account">
+              <IconFont type="icon-binance" />
+              <span className="amount">{matchedData.binance.toFixed(2)}</span>
+            </li>
+            <li className="account">
+              <IconFont type="icon-okex" />
+              <span className="amount">{matchedData.okex.toFixed(2)}</span>
+            </li>
+            <li className="account">
+              <IconFont type="icon-huobi" />
+              <span className="amount">{matchedData.huobi.toFixed(2)}</span>
+            </li>
+            <li className="account">
+              <IconFont type="icon-hopex" />
+              <span className="amount">{matchedData.hopex.toFixed(2)}</span>
+            </li>
+          </ul>
+        </Col>
+      </Row>
+    ) : null;
+  };
+
   render() {
     const digitalCurrencyStore = this.props.digitalCurrencyStore!;
     const {
@@ -48,6 +85,7 @@ export default class DigitalCurrency extends React.Component<
           disabledDate={(currentDate: moment.Moment) => {
             return currentDate.isAfter(moment());
           }}
+          monthCellRender={this.monthCellRender}
           onSelect={onSelectDate}
         />
         <Modal
