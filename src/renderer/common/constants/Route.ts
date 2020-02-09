@@ -16,7 +16,7 @@ interface RouteItem {
 
 export const HomeMenu: RouteItem[] = [
   {
-    key: 'currency',
+    key: 'digital-currency',
     to: '/digital-currency',
     title: '数字货币',
     iconType: 'icon-btc',
