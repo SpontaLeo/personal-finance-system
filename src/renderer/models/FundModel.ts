@@ -1,5 +1,5 @@
 import BaseModel from './BaseModel';
-import { FundItem } from '../../shared/interfaces/fund';
+import { FundItem } from '../../shared/interfaces/Fund';
 
 export default class FundModel extends BaseModel {
   date: string;

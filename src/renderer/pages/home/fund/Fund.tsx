@@ -76,7 +76,7 @@ export default class Fund extends React.Component<FundProps> {
           新增记录
         </Button>
         <FundTable
-          size="small"
+          size="middle"
           bordered={true}
           dataSource={investmentRecordList}
           pagination={

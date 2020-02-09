@@ -1,6 +1,6 @@
 import { action, observable } from 'mobx';
 
-import { FundItem } from '../../shared/interfaces/fund';
+import { FundItem } from '../../shared/interfaces/Fund';
 import FundModel from '../models/FundModel';
 import { ItemActionType } from '../common/constants/interface';
 import { generateUUID } from '../../shared/common/methods/index';
