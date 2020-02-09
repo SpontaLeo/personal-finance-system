@@ -32,11 +32,10 @@ function createDevTools() {
 function createWindow() {
   // 创建浏览器窗口。
   win = new BrowserWindow({
-    icon: './src/assets/images/logo.ico',
-    width: 960,
-    height: 720,
-    minWidth: 800,
-    minHeight: 600,
+    width: 1080,
+    height: 810,
+    minWidth: 960,
+    minHeight: 720,
     webPreferences: {
       nodeIntegration: true,
       preload: path.join(__dirname, '../preload.js'),
