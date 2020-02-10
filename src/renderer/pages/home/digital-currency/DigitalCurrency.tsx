@@ -1,6 +1,6 @@
 import './DigitalCurrency.scss';
 
-import { Calendar, Col, Modal, Row, Statistic } from 'antd';
+import { Button, Calendar, Col, Modal, Row, Statistic } from 'antd';
 import { inject, observer } from 'mobx-react';
 
 import { DigitalCurrencyFieldValues } from './digital-currency-form/DigitalCurrencyForm';
@@ -74,17 +74,18 @@ export default class DigitalCurrency extends React.Component<
       modalVisible,
       closeModal,
       selectedData,
+      startAssetsCurve,
     } = digitalCurrencyStore;
 
     return (
-      <div>
+      <div className="digital-currency">
         <Calendar
           mode="year"
           value={selectedDate}
           validRange={[moment('2020-01-01'), moment('2099-12-31')]}
-          disabledDate={(currentDate: moment.Moment) => {
-            return currentDate.isAfter(moment());
-          }}
+          // disabledDate={(currentDate: moment.Moment) => {
+          //   return currentDate.isAfter(moment());
+          // }}
           monthCellRender={this.monthCellRender}
           onSelect={onSelectDate}
         />
@@ -102,6 +103,13 @@ export default class DigitalCurrency extends React.Component<
             initialValues={selectedData}
           />
         </Modal>
+        <Button
+          className="assets-curve-btn"
+          type="primary"
+          onClick={startAssetsCurve}
+        >
+          资金曲线分析
+        </Button>
       </div>
     );
   }

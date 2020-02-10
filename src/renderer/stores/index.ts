@@ -7,7 +7,7 @@ import { RouterStore } from 'mobx-react-router';
 
 export const routingStore = new RouterStore();
 export const homeStore = new HomeStore(routingStore);
-export const digitalCurrencyStore = new DigitalCurrencyStore();
+export const digitalCurrencyStore = new DigitalCurrencyStore(routingStore);
 export const fundStore = new FundStore();
 export const liabilitiesStore = new LiabilitiesStore(routingStore);
 export const personalBillStore = new PersonalBillStore(routingStore);

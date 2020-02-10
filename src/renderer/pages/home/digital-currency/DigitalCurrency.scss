@@ -1,11 +1,22 @@
-.account-overview {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.digital-currency {
+  padding: 2em;
+  position: relative;
 
-  .account {
-    .amount {
-      padding-left: 1em;
+  .assets-curve-btn {
+    position: absolute;
+    top: calc(2em + 11px);
+    left: calc(2em + 16px);
+  }
+
+  .account-overview {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    .account {
+      .amount {
+        padding-left: 1em;
+      }
     }
   }
 }

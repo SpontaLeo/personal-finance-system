@@ -3,10 +3,13 @@ import { action, computed, observable } from 'mobx';
 import BaseStore from './BaseStore';
 import { DigitalCurrencyItem } from '../../shared/interfaces/DigitalCurrenty';
 import DigitalCurrencyModel from '../models/DigitalCurrencyModel';
+import { RouterStore } from 'mobx-react-router';
 import { generateUUID } from '../../shared/common/methods/index';
 import moment from 'moment';
 
 export default class DigitalCurrencyStore extends BaseStore {
+  routingStore: RouterStore;
+
   @observable
   digitalCurrencyData: { [key: string]: DigitalCurrencyModel } = {
     '2020-01': {
@@ -45,6 +48,11 @@ export default class DigitalCurrencyStore extends BaseStore {
     return matchedData ? matchedData : undefined;
   }
 
+  constructor(routingStore: RouterStore) {
+    super();
+    this.routingStore = routingStore;
+  }
+
   @action.bound
   closeModal() {
     this.modalVisible = false;
@@ -69,5 +77,10 @@ export default class DigitalCurrencyStore extends BaseStore {
     );
 
     this.closeModal();
+  }
+
+  @action.bound
+  startAssetsCurve() {
+    this.routingStore.push('digital-currency/assets-curve');
   }
 }

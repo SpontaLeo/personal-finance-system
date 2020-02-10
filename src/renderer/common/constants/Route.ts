@@ -1,3 +1,4 @@
+import AssetsCurve from '../../pages/home/digital-currency/assets-curve/AssetsCurve';
 import Bill from '../../pages/home/personal-bill/bill/Bill';
 import DigitalCurrency from '../../pages/home/digital-currency/DigitalCurrency';
 import Fund from '../../pages/home/fund/Fund';
@@ -46,6 +47,12 @@ export const HomeMenu: RouteItem[] = [
 ];
 
 export const ChildRoute: RouteItem[] = [
+  {
+    key: 'assets-curve',
+    parentKey: 'digital-currency',
+    to: '/digital-currency/assets-curve',
+    component: AssetsCurve,
+  },
   {
     key: 'liability',
     parentKey: 'liabilities',
