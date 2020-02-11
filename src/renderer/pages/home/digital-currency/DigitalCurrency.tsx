@@ -35,7 +35,9 @@ export default class DigitalCurrency extends React.Component<
     const digitalCurrencyStore = this.props.digitalCurrencyStore!;
 
     const matchedData: DigitalCurrencyModel | null =
-      digitalCurrencyStore.digitalCurrencyData[date.format('YYYY-MM')];
+      digitalCurrencyStore.digitalCurrencyData[date.format('YYYY')][
+        date.format('MM')
+      ];
 
     return matchedData ? (
       <Row>

@@ -1,169 +1,96 @@
 import './AssetsCurve.scss';
 
 import { Axis, Chart, Geom, Legend, Tooltip } from 'bizcharts';
+import { inject, observer } from 'mobx-react';
 
+import DigitalCurrencyModel from '../../../../models/DigitalCurrencyModel';
+import DigitalCurrencyStore from '../../../../stores/DigitalCurrencyStore';
 import React from 'react';
 
-export default class AssetsCurve extends React.Component<{}> {
-  render() {
-    const data = [
-      {
-        month: 'Jan',
-        city: 'Tokyo',
-        temperature: 7,
-      },
-      {
-        month: 'Jan',
-        city: 'London',
-        temperature: 3.9,
-      },
-      {
-        month: 'Feb',
-        city: 'Tokyo',
-        temperature: 6.9,
-      },
-      {
-        month: 'Feb',
-        city: 'London',
-        temperature: 4.2,
-      },
-      {
-        month: 'Mar',
-        city: 'Tokyo',
-        temperature: 9.5,
-      },
-      {
-        month: 'Mar',
-        city: 'London',
-        temperature: 5.7,
-      },
-      {
-        month: 'Apr',
-        city: 'Tokyo',
-        temperature: 14.5,
-      },
-      {
-        month: 'Apr',
-        city: 'London',
-        temperature: 8.5,
-      },
-      {
-        month: 'May',
-        city: 'Tokyo',
-        temperature: 18.4,
-      },
-      {
-        month: 'May',
-        city: 'London',
-        temperature: 11.9,
-      },
-      {
-        month: 'Jun',
-        city: 'Tokyo',
-        temperature: 21.5,
-      },
-      {
-        month: 'Jun',
-        city: 'London',
-        temperature: 15.2,
-      },
-      {
-        month: 'Jul',
-        city: 'Tokyo',
-        temperature: 25.2,
-      },
-      {
-        month: 'Jul',
-        city: 'London',
-        temperature: 17,
-      },
-      {
-        month: 'Aug',
-        city: 'Tokyo',
-        temperature: 26.5,
-      },
-      {
-        month: 'Aug',
-        city: 'London',
-        temperature: 16.6,
-      },
-      {
-        month: 'Sep',
-        city: 'Tokyo',
-        temperature: 23.3,
-      },
-      {
-        month: 'Sep',
-        city: 'London',
-        temperature: 14.2,
-      },
-      {
-        month: 'Oct',
-        city: 'Tokyo',
-        temperature: 18.3,
-      },
-      {
-        month: 'Oct',
-        city: 'London',
-        temperature: 10.3,
-      },
-      {
-        month: 'Nov',
-        city: 'Tokyo',
-        temperature: 13.9,
-      },
-      {
-        month: 'Nov',
-        city: 'London',
-        temperature: 6.6,
-      },
-      {
-        month: 'Dec',
-        city: 'Tokyo',
-        temperature: 9.6,
-      },
-      {
-        month: 'Dec',
-        city: 'London',
-        temperature: 4.8,
-      },
-    ];
+interface AssetsCurveProps {
+  digitalCurrencyStore?: DigitalCurrencyStore;
+}
 
+interface AssetsCurveState {
+  selectedYear: string;
+}
+
+@inject('digitalCurrencyStore')
+@observer
+export default class AssetsCurve extends React.Component<
+  AssetsCurveProps,
+  AssetsCurveState
+> {
+  constructor(props: AssetsCurveProps) {
+    super(props);
+    this.state = {
+      selectedYear: props.digitalCurrencyStore!.selectedDate.format('YYYY'),
+    };
+  }
+
+  private chartData() {
+    const { digitalCurrencyData } = this.props.digitalCurrencyStore!;
+    const { selectedYear } = this.state;
+
+    let data: any[] = [];
+    const matchedYearData = digitalCurrencyData[selectedYear];
+    if (matchedYearData) {
+      Object.keys(matchedYearData).forEach(key => {
+        const monthData: DigitalCurrencyModel = matchedYearData[key];
+        data.push({
+          month: key,
+          binance: monthData.binance,
+          okex: monthData.okex,
+          huobi: monthData.huobi,
+          hopex: monthData.hopex,
+          total: monthData.total,
+        });
+      });
+    }
+
+    return data;
+  }
+
+  render() {
     return (
       <div className="assets-curve">
-        <Chart height={400} data={data} padding="auto" forceFit>
-          <Legend position="top-right" layout="vertical" />
-          <Axis name="month" />
-          <Axis
-            name="temperature"
-            label={{
-              formatter: val => `${val}°C`,
-            }}
-          />
-          <Tooltip
-            crosshairs={{
-              type: 'y',
-            }}
-          />
-          <Geom
-            type="line"
-            position="month*temperature"
-            size={2}
-            color={'city'}
-            shape={'smooth'}
-          />
-          <Geom
-            type="point"
-            position="month*temperature"
-            size={4}
-            shape={'circle'}
-            color={'city'}
-            style={{
-              stroke: '#fff',
-              lineWidth: 1,
-            }}
-          />
-        </Chart>
+        {this.chartData().length !== 0 ? (
+          <Chart height={500} data={this.chartData()} padding="auto" forceFit>
+            <Legend position="top-right" layout="vertical" />
+            <Axis name="month" />
+            <Axis
+              name="binance"
+              label={{
+                formatter: val => `${val}`,
+              }}
+            />
+            <Tooltip
+              crosshairs={{
+                type: 'y',
+              }}
+            />
+            <Geom
+              type="line"
+              position="month*binance"
+              size={2}
+              color={'binance'}
+              shape={'smooth'}
+            />
+            <Geom
+              type="point"
+              position="month*binance"
+              size={4}
+              shape={'circle'}
+              color={'binance'}
+              style={{
+                stroke: '#fff',
+                lineWidth: 1,
+              }}
+            />
+          </Chart>
+        ) : (
+          <div>本年度暂无数据</div>
+        )}
       </div>
     );
   }

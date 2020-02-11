@@ -11,26 +11,40 @@ export default class DigitalCurrencyStore extends BaseStore {
   routingStore: RouterStore;
 
   @observable
-  digitalCurrencyData: { [key: string]: DigitalCurrencyModel } = {
-    '2020-01': {
-      id: generateUUID(),
-      createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-      updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-      binance: 0,
-      okex: 0,
-      huobi: 0,
-      hopex: 0,
-      total: 0,
-    },
-    '2020-02': {
-      id: generateUUID(),
-      createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-      updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-      binance: 2000,
-      okex: 800,
-      huobi: 1700,
-      hopex: 200,
-      total: 4700,
+  digitalCurrencyData: {
+    [key: string]: { [key: string]: DigitalCurrencyModel };
+  } = {
+    '2020': {
+      '01': {
+        id: generateUUID(),
+        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+        updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+        binance: 0,
+        okex: 0,
+        huobi: 0,
+        hopex: 0,
+        total: 0,
+      },
+      '02': {
+        id: generateUUID(),
+        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+        updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+        binance: 2000,
+        okex: 800,
+        huobi: 1700,
+        hopex: 200,
+        total: 4700,
+      },
+      '03': {
+        id: generateUUID(),
+        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+        updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+        binance: 2100,
+        okex: 400,
+        huobi: 1800,
+        hopex: 260,
+        total: 4560,
+      },
     },
   };
 
@@ -43,8 +57,8 @@ export default class DigitalCurrencyStore extends BaseStore {
   @computed
   get selectedData(): DigitalCurrencyModel | undefined {
     const matchedData = this.digitalCurrencyData[
-      this.selectedDate.format('YYYY-MM')
-    ];
+      this.selectedDate.format('YYYY')
+    ][this.selectedDate.format('MM')];
     return matchedData ? matchedData : undefined;
   }
 
@@ -71,8 +85,8 @@ export default class DigitalCurrencyStore extends BaseStore {
 
   @action.bound
   updateData(digitalCurrencyItem: Partial<DigitalCurrencyItem>) {
-    this.digitalCurrencyData[
-      this.selectedDate.format('YYYY-MM')
+    this.digitalCurrencyData[this.selectedDate.format('YYYY')][
+      'MM'
     ] = new DigitalCurrencyModel(
       Object.assign(digitalCurrencyItem, {
         id: generateUUID(),
