@@ -19,11 +19,11 @@ export default class DigitalCurrencyStore extends BaseStore {
         id: generateUUID(),
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-        binance: 0,
-        okex: 0,
-        huobi: 0,
-        hopex: 0,
-        total: 0,
+        binance: 1600,
+        okex: 750,
+        huobi: 1400,
+        hopex: 180,
+        total: 3930,
       },
       '02': {
         id: generateUUID(),
@@ -56,9 +56,11 @@ export default class DigitalCurrencyStore extends BaseStore {
 
   @computed
   get selectedData(): DigitalCurrencyModel | undefined {
-    const matchedData = this.digitalCurrencyData[
-      this.selectedDate.format('YYYY')
-    ][this.selectedDate.format('MM')];
+    const matchedData =
+      this.digitalCurrencyData[this.selectedDate.format('YYYY')] &&
+      this.digitalCurrencyData[this.selectedDate.format('YYYY')][
+        this.selectedDate.format('MM')
+      ];
     return matchedData ? matchedData : undefined;
   }
 
@@ -85,15 +87,28 @@ export default class DigitalCurrencyStore extends BaseStore {
 
   @action.bound
   updateData(digitalCurrencyItem: Partial<DigitalCurrencyItem>) {
-    this.digitalCurrencyData[this.selectedDate.format('YYYY')][
-      'MM'
-    ] = new DigitalCurrencyModel(
-      Object.assign(digitalCurrencyItem, {
-        id: generateUUID(),
-        createdAt: moment().toString(),
-        updatedAt: moment().toString(),
-      }) as DigitalCurrencyItem,
-    );
+    if (this.digitalCurrencyData[this.selectedDate.format('YYYY')]) {
+      this.digitalCurrencyData[this.selectedDate.format('YYYY')][
+        this.selectedDate.format('MM')
+      ] = new DigitalCurrencyModel(
+        Object.assign(digitalCurrencyItem, {
+          id: generateUUID(),
+          createdAt: moment().toString(),
+          updatedAt: moment().toString(),
+        }) as DigitalCurrencyItem,
+      );
+    } else {
+      this.digitalCurrencyData[this.selectedDate.format('YYYY')] = {};
+      this.digitalCurrencyData[this.selectedDate.format('YYYY')][
+        this.selectedDate.format('MM')
+      ] = new DigitalCurrencyModel(
+        Object.assign(digitalCurrencyItem, {
+          id: generateUUID(),
+          createdAt: moment().toString(),
+          updatedAt: moment().toString(),
+        }) as DigitalCurrencyItem,
+      );
+    }
 
     this.closeModal();
   }
