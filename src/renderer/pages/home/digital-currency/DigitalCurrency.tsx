@@ -86,10 +86,10 @@ export default class DigitalCurrency extends React.Component<
         <Calendar
           mode="year"
           value={selectedDate}
-          validRange={[moment('2020-01-01'), moment('2099-12-31')]}
-          // disabledDate={(currentDate: moment.Moment) => {
-          //   return currentDate.isAfter(moment());
-          // }}
+          validRange={[moment('2020-01-01'), moment()]}
+          disabledDate={(currentDate: moment.Moment) => {
+            return currentDate.isAfter(moment());
+          }}
           onPanelChange={onPanelChange}
           monthCellRender={this.monthCellRender}
           onSelect={onSelectDate}

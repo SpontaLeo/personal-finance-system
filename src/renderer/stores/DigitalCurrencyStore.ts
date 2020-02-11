@@ -5,6 +5,7 @@ import { DigitalCurrencyItem } from '../../shared/interfaces/DigitalCurrenty';
 import DigitalCurrencyModel from '../models/DigitalCurrencyModel';
 import { RouterStore } from 'mobx-react-router';
 import { generateUUID } from '../../shared/common/methods/index';
+import { message } from 'antd';
 import moment from 'moment';
 
 export default class DigitalCurrencyStore extends BaseStore {
@@ -24,26 +25,6 @@ export default class DigitalCurrencyStore extends BaseStore {
         huobi: 1400,
         hopex: 180,
         total: 3930,
-      },
-      '02': {
-        id: generateUUID(),
-        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-        updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-        binance: 2000,
-        okex: 800,
-        huobi: 1700,
-        hopex: 200,
-        total: 4700,
-      },
-      '03': {
-        id: generateUUID(),
-        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-        updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-        binance: 2100,
-        okex: 400,
-        huobi: 1800,
-        hopex: 260,
-        total: 4560,
       },
     },
   };
@@ -77,7 +58,34 @@ export default class DigitalCurrencyStore extends BaseStore {
   @action.bound
   onSelectDate(date?: moment.Moment) {
     this.selectedDate = date!;
-    this.modalVisible = true;
+
+    const year = date!.format('YYYY');
+    const month = date!.format('MM');
+    const lastYear = (date!.year() - 1).toString();
+    const lastMonth = moment(
+      date!.get('month') === 0 ? 11 : date!.get('month') - 1,
+    ).format('MM');
+    // 首先检查它的上一个月是否有数据，若没有则提示先填写上个月数据。从2020年1月开始
+    if (!(year === '2020' && month === '01')) {
+      let hasDataLastMonth;
+      if (month !== '01') {
+        hasDataLastMonth =
+          this.digitalCurrencyData[year] &&
+          this.digitalCurrencyData[year][lastMonth];
+      } else {
+        hasDataLastMonth =
+          this.digitalCurrencyData[lastYear] &&
+          this.digitalCurrencyData[year][lastMonth];
+      }
+
+      if (hasDataLastMonth) {
+        this.modalVisible = true;
+      } else {
+        message.warn('请先填写上个月数据');
+      }
+    } else {
+      this.modalVisible = true;
+    }
   }
 
   @action.bound

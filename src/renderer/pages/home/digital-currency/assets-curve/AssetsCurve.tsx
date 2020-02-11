@@ -142,7 +142,7 @@ export default class AssetsCurve extends React.Component<
             suffixIcon={<IconFont type="icon-year" />}
             defaultValue={selectedYear}
             startYear={2020}
-            endYear={2099}
+            endYear={moment().year()}
             onChange={this.changeSelectedYear}
           />
           <RadioGroup
