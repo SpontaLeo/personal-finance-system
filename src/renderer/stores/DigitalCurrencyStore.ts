@@ -65,6 +65,11 @@ export default class DigitalCurrencyStore extends BaseStore {
   }
 
   @action.bound
+  onPanelChange(data?: moment.Moment) {
+    this.selectedDate = data!;
+  }
+
+  @action.bound
   updateData(digitalCurrencyItem: Partial<DigitalCurrencyItem>) {
     this.digitalCurrencyData[
       this.selectedDate.format('YYYY-MM')

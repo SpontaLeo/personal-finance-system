@@ -75,6 +75,7 @@ export default class DigitalCurrency extends React.Component<
       closeModal,
       selectedData,
       startAssetsCurve,
+      onPanelChange,
     } = digitalCurrencyStore;
 
     return (
@@ -86,6 +87,7 @@ export default class DigitalCurrency extends React.Component<
           // disabledDate={(currentDate: moment.Moment) => {
           //   return currentDate.isAfter(moment());
           // }}
+          onPanelChange={onPanelChange}
           monthCellRender={this.monthCellRender}
           onSelect={onSelectDate}
         />
