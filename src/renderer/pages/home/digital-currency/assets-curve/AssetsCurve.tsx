@@ -128,16 +128,11 @@ export default class AssetsCurve extends React.Component<{}> {
         temperature: 4.8,
       },
     ];
-    const cols = {
-      month: {
-        range: [0, 1],
-      },
-    };
 
     return (
       <div className="assets-curve">
-        <Chart height={400} data={data} scale={cols} forceFit>
-          <Legend />
+        <Chart height={400} data={data} padding="auto" forceFit>
+          <Legend position="top-right" layout="vertical" />
           <Axis name="month" />
           <Axis
             name="temperature"
