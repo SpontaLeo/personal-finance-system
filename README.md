@@ -5,14 +5,13 @@ A tool for managing personal finances.
 ## 数字货币
 
 - [x] 账户资产数据录入(okex, huobi, binance, hopex)
-- [ ] 单个/整体账户资金曲线分析(月/季/年)
-- [ ] 操作记录(增删改查)
+- [x] 单个/整体账户资金曲线分析(月/年)
 - [ ] 资金曲线分析数据导出(Excel)
-- [ ] 操作记录导出(增删改查)
 
 ## 基金定投
 
-- [x] 基金定投记录(增删改查)
+- [x] 基金定投记录(增删改)
+- [ ] 基金定投记录表格排序
 - [ ] 基金账户资金数据录入
 - [ ] 基金账户资金曲线分析(季度/年)
 - [ ] 基金定投记录导出
@@ -42,3 +41,8 @@ A tool for managing personal finances.
 ## 交易记录
 
 - [ ] 交易记录
+- [ ] 交易记录 Tag
+
+## 体验优化
+
+- [ ] macOS Catalina dark mode
