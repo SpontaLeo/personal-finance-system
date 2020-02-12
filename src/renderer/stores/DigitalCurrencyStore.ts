@@ -3,13 +3,16 @@ import { action, computed, observable } from 'mobx';
 import BaseStore from './BaseStore';
 import { DigitalCurrencyItem } from '../../shared/interfaces/DigitalCurrenty';
 import DigitalCurrencyModel from '../models/DigitalCurrencyModel';
+import DigitalCurrencyService from '../../server/DigitalCurrencyService';
 import { RouterStore } from 'mobx-react-router';
+import { digitalCurrencyService } from '../../server/index';
 import { generateUUID } from '../../shared/common/methods/index';
 import { message } from 'antd';
 import moment from 'moment';
 
 export default class DigitalCurrencyStore extends BaseStore {
   routingStore: RouterStore;
+  digitalCurrencyService: DigitalCurrencyService = digitalCurrencyService;
 
   @observable
   digitalCurrencyData: {

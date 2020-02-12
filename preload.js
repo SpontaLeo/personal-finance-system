@@ -4,3 +4,4 @@ window.__devtron = {
 };
 window.electron = require('electron');
 window.fs = require('fs-extra');
+window.path = require('path');

@@ -1,4 +1,6 @@
 const electron = (window as any).electron;
+const fs = (window as any).fs;
+const path = (window as any).path;
 
 // renderer直接引入有bug，导出供renderer使用
 const {
@@ -77,4 +79,6 @@ export {
   webFrame,
   WebRequest,
   webviewTag,
+  fs,
+  path,
 };
