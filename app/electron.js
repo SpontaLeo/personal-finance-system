@@ -1,7 +1,6 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow } = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
-// const log = require('electron-log');
 
 let win;
 
@@ -11,23 +10,6 @@ const localUrl = `file://${path.resolve(
   '../../app.asar/build',
 )}/index.html`;
 const appUrl = isDev ? devUrl : localUrl;
-
-// 利用electron-debug，添加和Chrome类似的快捷键
-isDev && require('electron-debug')({ enabled: true, showDevTools: false });
-// 用于添加Chromium插件
-function createDevTools() {
-  const {
-    default: installExtension,
-    MOBX_DEVTOOLS,
-    REACT_DEVELOPER_TOOLS,
-  } = require('electron-devtools-installer');
-  // 安装devtron
-  const devtronExtension = require('devtron');
-  devtronExtension.install();
-  // 安装React开发者工具
-  installExtension(REACT_DEVELOPER_TOOLS);
-  installExtension(MOBX_DEVTOOLS);
-}
 
 function createWindow() {
   // 创建浏览器窗口。
@@ -53,7 +35,6 @@ function createWindow() {
 
 app.on('ready', () => {
   createWindow();
-  isDev && createDevTools();
 });
 
 // 当全部窗口关闭时退出。
@@ -67,9 +48,4 @@ app.on('activate', () => {
   if (win === null) {
     createWindow();
   }
-});
-
-ipcMain.on('test', (event, arg) => {
-  console.log(`received ${arg}`);
-  // log.info(`received ${arg}`);
 });
