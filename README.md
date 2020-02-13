@@ -4,7 +4,7 @@ A tool for managing personal finances.
 
 ## 基础功能
 
-- [ ] 数据持久化
+- [x] 数据持久化
 
 ## 数字货币
 
