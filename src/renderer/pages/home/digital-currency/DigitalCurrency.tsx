@@ -85,7 +85,7 @@ export default class DigitalCurrency extends React.Component<
       <div className="digital-currency">
         <Button
           type="primary"
-          onClick={() => digitalCurrencyStore.digitalCurrencyService.getPath()}
+          onClick={() => digitalCurrencyStore.digitalCurrencyService.saveData()}
         >
           test fs
         </Button>

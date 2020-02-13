@@ -2,7 +2,6 @@ const { app, BrowserWindow } = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
 const fs = require('fs-extra');
-const log = require('electron-log');
 
 let win;
 
@@ -12,11 +11,6 @@ const localUrl = `file://${path.resolve(
   '../../app.asar/build',
 )}/index.html`;
 const appUrl = isDev ? devUrl : localUrl;
-
-// 获取应用用户目录
-const storePath = app.getPath('userData');
-
-log.info(storePath);
 
 // 利用electron-debug，添加和Chrome类似的快捷键
 isDev && require('electron-debug')({ enabled: true, showDevTools: false });
@@ -33,10 +27,6 @@ function createDevTools() {
   // 安装React开发者工具
   installExtension(REACT_DEVELOPER_TOOLS);
   installExtension(MOBX_DEVTOOLS);
-}
-
-if (!fs.pathExistsSync(storePath)) {
-  fs.mkdirpSync(storePath);
 }
 
 function createWindow() {
