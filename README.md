@@ -2,6 +2,10 @@
 
 A tool for managing personal finances.
 
+## 基础功能
+
+- [ ] 数据持久化
+
 ## 数字货币
 
 - [x] 账户资产数据录入(okex, huobi, binance, hopex)
