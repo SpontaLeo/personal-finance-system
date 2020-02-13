@@ -5,3 +5,5 @@ window.__devtron = {
 window.electron = require('electron');
 window.fs = require('fs-extra');
 window.path = require('path');
+window.lowdb = require('lowdb');
+window.FileSync = require('lowdb/adapters/FileSync');

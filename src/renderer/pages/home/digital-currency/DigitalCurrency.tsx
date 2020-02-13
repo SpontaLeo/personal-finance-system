@@ -83,12 +83,6 @@ export default class DigitalCurrency extends React.Component<
 
     return (
       <div className="digital-currency">
-        <Button
-          type="primary"
-          onClick={() => digitalCurrencyStore.digitalCurrencyService.saveData()}
-        >
-          test fs
-        </Button>
         <Calendar
           mode="year"
           value={selectedDate}
