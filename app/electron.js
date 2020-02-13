@@ -1,7 +1,6 @@
 const { app, BrowserWindow } = require('electron');
 const isDev = require('electron-is-dev');
 const path = require('path');
-const fs = require('fs-extra');
 
 let win;
 
@@ -38,7 +37,6 @@ function createWindow() {
     minHeight: 720,
     webPreferences: {
       nodeIntegration: true,
-      preload: path.join(__dirname, '../preload.js'),
     },
   });
 
