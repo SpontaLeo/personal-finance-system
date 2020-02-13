@@ -1,62 +1,75 @@
 import AppServer from './AppServer';
 import { DigitalCurrencyItem } from '../shared/interfaces/DigitalCurrenty';
+import DigitalCurrencyModel from '../renderer/models/DigitalCurrencyModel';
 import moment from 'moment';
 
 export default class DigitalCurrencyService extends AppServer {
   // 对应的db字段实例
   dbItem = this.db.get('digital-currency');
 
-  queryDigitalCurrencyList() {
-    return {
-      '2020': {
-        '01': {
-          id: this.generateUUID(),
-          createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-          updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-          binance: 1600,
-          okex: 750,
-          huobi: 1400,
-          hopex: 180,
-          total: 3930,
-        },
-      },
-    };
+  queryDigitalCurrencyData(): {
+    [key: string]: { [key: string]: DigitalCurrencyModel };
+  } {
+    const originData = this.dbItem.value();
+
+    Object.keys(originData).forEach(od => {
+      Object.keys(originData[od]).forEach(d => {
+        const data: DigitalCurrencyItem = originData[od][d];
+        originData[od][d] = new DigitalCurrencyModel(data);
+      });
+    });
+
+    return originData;
   }
 
-  updateData(
-    year: string,
-    month: string,
-    data: Partial<DigitalCurrencyItem>,
-    id?: string,
-  ) {
-    if (id) {
-    } else {
-      const hasYearData = this.dbItem.has(year).value();
-      if (hasYearData) {
-        const hasMonthData = this.dbItem
-          .has(year)
-          .has(month)
+  updateData(year: string, month: string, data: Partial<DigitalCurrencyItem>) {
+    const hasYearData = this.dbItem.has(year).value();
+    if (hasYearData) {
+      const hasMonthData = this.dbItem
+        .get(year)
+        .has(month)
+        .value();
+      if (hasMonthData) {
+        const prevData = this.dbItem
+          .get(year)
+          .get(month)
           .value();
 
-        if (hasMonthData) {
-          this.dbItem
-            .get(year)
-            .update(month, data)
-            .write();
-        } else {
-          this.dbItem
-            .get(year)
-            .set(`${month}`, data)
-            .write();
-        }
+        this.dbItem
+          .get(year)
+          .update(
+            month,
+            Object.assign(prevData, data, {
+              updatedAt: moment().toString(),
+            }) as DigitalCurrencyItem,
+          )
+          .write();
       } else {
         this.dbItem
-          .set(year, {
-            month: data,
-          })
+          .get(year)
+          .set(
+            month,
+            Object.assign(data, {
+              id: this.generateUUID(),
+              createdAt: moment().toString(),
+              updatedAt: moment().toString(),
+            }) as DigitalCurrencyItem,
+          )
           .write();
       }
+    } else {
+      this.dbItem.set(year, {}).write();
+      this.dbItem
+        .get(year)
+        .set(
+          month,
+          Object.assign(data, {
+            id: this.generateUUID(),
+            createdAt: moment().toString(),
+            updatedAt: moment().toString(),
+          }) as DigitalCurrencyItem,
+        )
+        .write();
     }
-    console.log(year, month, data);
   }
 }

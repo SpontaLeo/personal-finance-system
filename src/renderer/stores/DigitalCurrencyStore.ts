@@ -38,7 +38,7 @@ export default class DigitalCurrencyStore extends BaseStore {
   ) {
     super();
     this.routingStore = routingStore;
-    this.digitalCurrencyData = this.digitalCurrencyService.queryDigitalCurrencyList();
+    this.queryDigitalCurrencyData();
   }
 
   @action.bound
@@ -85,34 +85,16 @@ export default class DigitalCurrencyStore extends BaseStore {
   }
 
   @action.bound
+  queryDigitalCurrencyData() {
+    this.digitalCurrencyData = this.digitalCurrencyService.queryDigitalCurrencyData();
+  }
+
+  @action.bound
   updateData(digitalCurrencyItem: Partial<DigitalCurrencyItem>) {
     const year = this.selectedDate.format('YYYY');
     const month = this.selectedDate.format('MM');
     this.digitalCurrencyService.updateData(year, month, digitalCurrencyItem);
-
-    // if (this.digitalCurrencyData[this.selectedDate.format('YYYY')]) {
-    //   this.digitalCurrencyData[this.selectedDate.format('YYYY')][
-    //     this.selectedDate.format('MM')
-    //   ] = new DigitalCurrencyModel(
-    //     Object.assign(digitalCurrencyItem, {
-    //       id: 'xxxcdfdsfdsfdf',
-    //       createdAt: moment().toString(),
-    //       updatedAt: moment().toString(),
-    //     }) as DigitalCurrencyItem,
-    //   );
-    // } else {
-    //   this.digitalCurrencyData[this.selectedDate.format('YYYY')] = {};
-    //   this.digitalCurrencyData[this.selectedDate.format('YYYY')][
-    //     this.selectedDate.format('MM')
-    //   ] = new DigitalCurrencyModel(
-    //     Object.assign(digitalCurrencyItem, {
-    //       id: 'dsdsfdsfdsfsgg',
-    //       createdAt: moment().toString(),
-    //       updatedAt: moment().toString(),
-    //     }) as DigitalCurrencyItem,
-    //   );
-    // }
-
+    this.queryDigitalCurrencyData();
     this.closeModal();
   }
 
