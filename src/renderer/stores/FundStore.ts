@@ -3,7 +3,6 @@ import { action, observable } from 'mobx';
 import { FundItem } from '../../shared/interfaces/Fund';
 import FundModel from '../models/FundModel';
 import { ItemActionType } from '../common/constants/interface';
-import { generateUUID } from '../../shared/common/methods/index';
 import moment from 'moment';
 
 export default class FundStore {
@@ -22,7 +21,7 @@ export default class FundStore {
   constructor() {
     this.investmentRecordList = [
       new FundModel({
-        id: generateUUID(),
+        id: 'dfufadsfdsjfklsjfdljfa',
         date: moment().format('YYYY-MM-DD'),
         createdAt: moment().format('YYYY-MM-DD'),
         updatedAt: moment().format('YYYY-MM-DD'),
@@ -62,7 +61,7 @@ export default class FundStore {
     this.investmentRecordList.push(
       new FundModel(
         Object.assign(fundItem, {
-          id: generateUUID(),
+          id: 'sfdsaflgjdlkghlahglaksvldskgndslgno',
           createdAt: moment().toString(),
           updatedAt: moment().toString(),
         }) as FundItem,

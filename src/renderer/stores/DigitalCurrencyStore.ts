@@ -5,32 +5,16 @@ import { DigitalCurrencyItem } from '../../shared/interfaces/DigitalCurrenty';
 import DigitalCurrencyModel from '../models/DigitalCurrencyModel';
 import DigitalCurrencyService from '../../server/DigitalCurrencyService';
 import { RouterStore } from 'mobx-react-router';
-import { digitalCurrencyService } from '../../server/index';
-import { generateUUID } from '../../shared/common/methods/index';
 import { message } from 'antd';
 import moment from 'moment';
 
 export default class DigitalCurrencyStore extends BaseStore {
   routingStore: RouterStore;
-  digitalCurrencyService: DigitalCurrencyService = digitalCurrencyService;
 
   @observable
   digitalCurrencyData: {
     [key: string]: { [key: string]: DigitalCurrencyModel };
-  } = {
-    '2020': {
-      '01': {
-        id: generateUUID(),
-        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-        updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-        binance: 1600,
-        okex: 750,
-        huobi: 1400,
-        hopex: 180,
-        total: 3930,
-      },
-    },
-  };
+  } = {};
 
   @observable
   selectedDate: moment.Moment = moment();
@@ -48,9 +32,13 @@ export default class DigitalCurrencyStore extends BaseStore {
     return matchedData ? matchedData : undefined;
   }
 
-  constructor(routingStore: RouterStore) {
+  constructor(
+    routingStore: RouterStore,
+    private digitalCurrencyService: DigitalCurrencyService,
+  ) {
     super();
     this.routingStore = routingStore;
+    this.digitalCurrencyData = this.digitalCurrencyService.queryDigitalCurrencyList();
   }
 
   @action.bound
@@ -92,34 +80,38 @@ export default class DigitalCurrencyStore extends BaseStore {
   }
 
   @action.bound
-  onPanelChange(data?: moment.Moment) {
-    this.selectedDate = data!;
+  onPanelChange(date?: moment.Moment) {
+    this.selectedDate = date!;
   }
 
   @action.bound
   updateData(digitalCurrencyItem: Partial<DigitalCurrencyItem>) {
-    if (this.digitalCurrencyData[this.selectedDate.format('YYYY')]) {
-      this.digitalCurrencyData[this.selectedDate.format('YYYY')][
-        this.selectedDate.format('MM')
-      ] = new DigitalCurrencyModel(
-        Object.assign(digitalCurrencyItem, {
-          id: generateUUID(),
-          createdAt: moment().toString(),
-          updatedAt: moment().toString(),
-        }) as DigitalCurrencyItem,
-      );
-    } else {
-      this.digitalCurrencyData[this.selectedDate.format('YYYY')] = {};
-      this.digitalCurrencyData[this.selectedDate.format('YYYY')][
-        this.selectedDate.format('MM')
-      ] = new DigitalCurrencyModel(
-        Object.assign(digitalCurrencyItem, {
-          id: generateUUID(),
-          createdAt: moment().toString(),
-          updatedAt: moment().toString(),
-        }) as DigitalCurrencyItem,
-      );
-    }
+    const year = this.selectedDate.format('YYYY');
+    const month = this.selectedDate.format('MM');
+    this.digitalCurrencyService.updateData(year, month, digitalCurrencyItem);
+
+    // if (this.digitalCurrencyData[this.selectedDate.format('YYYY')]) {
+    //   this.digitalCurrencyData[this.selectedDate.format('YYYY')][
+    //     this.selectedDate.format('MM')
+    //   ] = new DigitalCurrencyModel(
+    //     Object.assign(digitalCurrencyItem, {
+    //       id: 'xxxcdfdsfdsfdf',
+    //       createdAt: moment().toString(),
+    //       updatedAt: moment().toString(),
+    //     }) as DigitalCurrencyItem,
+    //   );
+    // } else {
+    //   this.digitalCurrencyData[this.selectedDate.format('YYYY')] = {};
+    //   this.digitalCurrencyData[this.selectedDate.format('YYYY')][
+    //     this.selectedDate.format('MM')
+    //   ] = new DigitalCurrencyModel(
+    //     Object.assign(digitalCurrencyItem, {
+    //       id: 'dsdsfdsfdsfsgg',
+    //       createdAt: moment().toString(),
+    //       updatedAt: moment().toString(),
+    //     }) as DigitalCurrencyItem,
+    //   );
+    // }
 
     this.closeModal();
   }
