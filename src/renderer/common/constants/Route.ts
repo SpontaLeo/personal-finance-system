@@ -3,8 +3,8 @@ import Bill from '../../pages/home/personal-bill/bill/Bill';
 import DigitalCurrency from '../../pages/home/digital-currency/DigitalCurrency';
 import Fund from '../../pages/home/fund/Fund';
 import Liabilities from '../../pages/home/liabilities/Liabilities';
-import Liability from '../../pages/home/liabilities/liability/Liability';
 import PersonalBill from '../../pages/home/personal-bill/PersonalBill';
+import TradingRecord from '../../pages/trading-record/TradingRecord';
 
 interface RouteItem {
   key: string;
@@ -44,6 +44,13 @@ export const HomeMenu: RouteItem[] = [
     iconType: 'icon-liabilities',
     component: Liabilities,
   },
+  {
+    key: 'trading-record',
+    to: '/trading-record',
+    title: '交易记录',
+    iconType: 'icon-trading',
+    component: TradingRecord,
+  },
 ];
 
 export const ChildRoute: RouteItem[] = [
@@ -52,12 +59,6 @@ export const ChildRoute: RouteItem[] = [
     parentKey: 'digital-currency',
     to: '/digital-currency/assets-curve',
     component: AssetsCurve,
-  },
-  {
-    key: 'liability',
-    parentKey: 'liabilities',
-    to: '/liabilities/detail',
-    component: Liability,
   },
   {
     key: 'bill',
