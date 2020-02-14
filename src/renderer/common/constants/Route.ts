@@ -4,7 +4,7 @@ import DigitalCurrency from '../../pages/home/digital-currency/DigitalCurrency';
 import Fund from '../../pages/home/fund/Fund';
 import Liabilities from '../../pages/home/liabilities/Liabilities';
 import PersonalBill from '../../pages/home/personal-bill/PersonalBill';
-import TradingRecord from '../../pages/trading-record/TradingRecord';
+import TradingRecord from '../../pages/home/trading-record/TradingRecord';
 
 interface RouteItem {
   key: string;

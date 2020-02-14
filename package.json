@@ -11,7 +11,8 @@
   "dependencies": {
     "electron-is-dev": "^1.1.0",
     "fs-extra": "^8.1.0",
-    "lowdb": "^1.0.0"
+    "lowdb": "^1.0.0",
+    "stackedit-js": "^1.0.7"
   },
   "scripts": {
     "start": "concurrently \"npm run start:react\" \"npm run start:electron\"",
