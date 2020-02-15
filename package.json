@@ -11,8 +11,7 @@
   "dependencies": {
     "electron-is-dev": "^1.1.0",
     "fs-extra": "^8.1.0",
-    "lowdb": "^1.0.0",
-    "stackedit-js": "^1.0.7"
+    "lowdb": "^1.0.0"
   },
   "scripts": {
     "start": "concurrently \"npm run start:react\" \"npm run start:electron\"",
@@ -56,6 +55,8 @@
     "axios": "^0.19.0",
     "babel-plugin-import": "^1.13.0",
     "bizcharts": "^3.5.6",
+    "braft-editor": "^2.3.8",
+    "braft-extensions": "^0.0.20",
     "concurrently": "^4.1.2",
     "cross-env": "^6.0.0",
     "customize-cra": "^0.7.0",

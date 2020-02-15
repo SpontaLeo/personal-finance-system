@@ -1,4 +1,5 @@
 import AssetsCurve from '../../pages/home/digital-currency/assets-curve/AssetsCurve';
+import BalanceSheetCurve from '../../pages/home/liabilities/balance-sheet-curve/BalanceSheetCurve';
 import Bill from '../../pages/home/personal-bill/bill/Bill';
 import DigitalCurrency from '../../pages/home/digital-currency/DigitalCurrency';
 import Fund from '../../pages/home/fund/Fund';
@@ -65,5 +66,11 @@ export const ChildRoute: RouteItem[] = [
     parentKey: 'personal-bill',
     to: '/personal-bill/detail',
     component: Bill,
+  },
+  {
+    key: 'balance-sheet-curve',
+    parentKey: 'liabilities',
+    to: '/liabilities/balance-sheet-curve',
+    component: BalanceSheetCurve,
   },
 ];
