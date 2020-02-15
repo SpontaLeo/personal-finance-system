@@ -51,7 +51,7 @@ export default class Liabilities extends React.Component<LiabilitiesProps> {
       <Row className="month-cell-container">
         <Col span={12}>
           <Statistic
-            title="总计（USD）"
+            title="总计（CNY）"
             value={matchedData.totalAssets.toFixed(2)}
           />
         </Col>
