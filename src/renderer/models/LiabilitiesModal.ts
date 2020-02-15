@@ -49,7 +49,7 @@ export default class LiabilitiesModel extends BaseModel {
     this.cash = data.cash;
     this.debitCard = data.debitCard;
     this.fund = data.fund;
-    this.lend = data.fund;
+    this.lend = data.lend;
     this.alipay = data.alipay;
     this.wechatPay = data.wechatPay;
     this.housingFund = data.housingFund;

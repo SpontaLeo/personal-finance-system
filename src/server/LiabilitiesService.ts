@@ -14,6 +14,7 @@ export default class LiabilitiesService extends AppServer {
     Object.keys(originData).forEach(od => {
       Object.keys(originData[od]).forEach(d => {
         const data: LiabilitiesItem = originData[od][d];
+        console.log(data);
         originData[od][d] = new LiabilitiesModel(data);
       });
     });

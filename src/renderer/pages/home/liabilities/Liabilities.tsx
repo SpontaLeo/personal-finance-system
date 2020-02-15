@@ -108,29 +108,23 @@ export default class Liabilities extends React.Component<LiabilitiesProps> {
             <li className="liability">
               <IconFont type="icon-credit-card" />
               <span className="amount">
-                ¥ {matchedData.creditCard !== 0 ? '-' : null}
-                {matchedData.creditCard.toFixed(2)}
+                ¥ -{matchedData.creditCard.toFixed(2)}
               </span>
             </li>
             <li className="liability">
               <IconFont type="icon-borrow" />
-              <span className="amount">
-                ¥ {matchedData.borrow !== 0 ? '-' : null}
-                {matchedData.borrow.toFixed(2)}
-              </span>
+              <span className="amount">¥ -{matchedData.borrow.toFixed(2)}</span>
             </li>
             <li className="liability">
               <IconFont type="icon-ant-check-later" />
               <span className="amount">
-                ¥ {matchedData.antCheckLater !== 0 ? '-' : null}
-                {matchedData.antCheckLater.toFixed(2)}
+                ¥ -{matchedData.antCheckLater.toFixed(2)}
               </span>
             </li>
             <li className="liability">
               <IconFont type="icon-other" />
               <span className="amount">
-                ¥ {matchedData.otherLiability !== 0 ? '-' : null}
-                {matchedData.otherLiability.toFixed(2)}
+                ¥ -{matchedData.otherLiability.toFixed(2)}
               </span>
             </li>
           </ul>
