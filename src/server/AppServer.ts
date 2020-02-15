@@ -5,7 +5,6 @@ import { v4 as uuid } from 'uuid';
 
 // 本地应用只包含数据库读写操作
 export default class AppServer {
-  cryptoKey: string = 'personal-finance-system @ Nayuta';
   db: any;
 
   generateUUID() {
@@ -24,8 +23,9 @@ export default class AppServer {
       .defaults({
         'digital-currency': {},
         fund: {},
-        bill: {},
+        'personal-bill': {},
         liabilities: {},
+        'trading-record': {},
       })
       .write();
   }
