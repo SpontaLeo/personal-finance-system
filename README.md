@@ -32,7 +32,7 @@ A tool for managing personal finances.
 ## 资产负债
 
 - [x] 资产/负债记录
-- [ ] 资产/负债曲线
+- [x] 资产/负债曲线
 - [ ] 资产/负债数据导出
 
 ## 交易记录
