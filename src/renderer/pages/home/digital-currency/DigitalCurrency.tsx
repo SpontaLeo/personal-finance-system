@@ -32,13 +32,12 @@ export default class DigitalCurrency extends React.Component<
   };
 
   monthCellRender = (date: moment.Moment) => {
-    const digitalCurrencyStore = this.props.digitalCurrencyStore!;
+    const { digitalCurrencyData } = this.props.digitalCurrencyStore!;
+    const year = date.format('YYYY');
+    const month = date.format('MM');
 
     const matchedData: DigitalCurrencyModel | null =
-      digitalCurrencyStore.digitalCurrencyData[date.format('YYYY')] &&
-      digitalCurrencyStore.digitalCurrencyData[date.format('YYYY')][
-        date.format('MM')
-      ];
+      digitalCurrencyData[year] && digitalCurrencyData[year][month];
 
     return matchedData ? (
       <Row>

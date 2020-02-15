@@ -8,7 +8,6 @@ export default class ExchangeRateService extends AppServer {
   }
 
   updateExchangeRate(rate: number) {
-    console.log('rate', rate);
     this.db.update('exchange-rate', (v: number) => (v = rate)).write();
   }
 }

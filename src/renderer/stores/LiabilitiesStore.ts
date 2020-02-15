@@ -46,6 +46,7 @@ export default class LiabilitiesStore extends BaseStore {
   ) {
     super();
     this.routingStore = routingStore;
+    this.queryLiabilitiesData();
   }
 
   @action.bound
