@@ -214,7 +214,9 @@ export default class BalanceSheetCurve extends React.Component<
             defaultValue={accountMode}
             buttonStyle="solid"
           >
-            <Button value="per">单个</Button>
+            <Button value="per" disabled={type === 'net-asset'}>
+              单个
+            </Button>
             <Button value="total">总体</Button>
           </RadioGroup>
           <RadioGroup
@@ -224,7 +226,9 @@ export default class BalanceSheetCurve extends React.Component<
           >
             <Button value="asset">资产</Button>
             <Button value="liability">负债</Button>
-            <Button value="net-asset">净资产</Button>
+            <Button value="net-asset" disabled={accountMode === 'per'}>
+              净资产
+            </Button>
           </RadioGroup>
           <RadioGroup
             onChange={this.changeMode}
