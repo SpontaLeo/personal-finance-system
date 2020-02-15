@@ -26,6 +26,7 @@ export default class AppServer {
         'personal-bill': {},
         liabilities: {},
         'trading-record': {},
+        'exchange-rate': 7,
       })
       .write();
   }
