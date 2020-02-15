@@ -22,7 +22,7 @@ export default class AppServer {
     this.db
       .defaults({
         'digital-currency': {},
-        fund: {},
+        fund: [],
         'personal-bill': {},
         liabilities: {},
         'trading-record': {},

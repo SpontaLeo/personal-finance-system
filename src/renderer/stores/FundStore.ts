@@ -2,6 +2,7 @@ import { action, observable } from 'mobx';
 
 import { FundItem } from '../../shared/interfaces/Fund';
 import FundModel from '../models/FundModel';
+import FundService from '../../server/FundService';
 import { ItemActionType } from '../common/constants/interface';
 import moment from 'moment';
 
@@ -18,25 +19,7 @@ export default class FundStore {
   @observable
   fundModalMode: ItemActionType = ItemActionType.CREATE;
 
-  constructor() {
-    this.investmentRecordList = [
-      new FundModel({
-        id: 'dfufadsfdsjfklsjfdljfa',
-        date: moment().format('YYYY-MM-DD'),
-        createdAt: moment().format('YYYY-MM-DD'),
-        updatedAt: moment().format('YYYY-MM-DD'),
-        target: '华夏300',
-        amount: 1000,
-        action: 'buy',
-        price: 2.41,
-        pe: 20,
-        pb: 1.2,
-        dividendYieldRatio: 10,
-        remark:
-          '占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 占位符 ',
-      }),
-    ];
-  }
+  constructor(private fundService: FundService) {}
 
   @action.bound
   openModal(
