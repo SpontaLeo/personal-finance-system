@@ -7,6 +7,7 @@ import {
 import { Axis, Chart, Geom, Legend, Tooltip } from 'bizcharts';
 import { inject, observer } from 'mobx-react';
 
+import { AccountItem } from '../../../../common/constants/Liabilities';
 import { IconFont } from '../../../../common/components/icon-font/index';
 import LiabilitiesModel from '../../../../models/LiabilitiesModal';
 import LiabilitiesStore from '../../../../stores/LiabilitiesStore';
@@ -69,19 +70,19 @@ export default class BalanceSheetCurve extends React.Component<
           if (accountMode === 'per') {
             // 单个账户模式下，只能选择资产和负债，不能选择净资产
             if (type === 'asset') {
-              AssetAccountList.forEach((assetAccount: string) => {
+              AssetAccountList.forEach((assetAccount: AccountItem) => {
                 data.push({
                   key: month,
-                  amount: (monthData as any)[assetAccount],
-                  name: assetAccount,
+                  amount: (monthData as any)[assetAccount.key],
+                  name: assetAccount.title,
                 });
               });
             } else if (type === 'liability') {
-              LiabilityAccountList.forEach((liabilityAccount: string) => {
+              LiabilityAccountList.forEach((liabilityAccount: AccountItem) => {
                 data.push({
                   key: month,
-                  amount: (monthData as any)[liabilityAccount],
-                  name: liabilityAccount,
+                  amount: (monthData as any)[liabilityAccount.key],
+                  name: liabilityAccount.title,
                 });
               });
             }
@@ -90,19 +91,19 @@ export default class BalanceSheetCurve extends React.Component<
               data.push({
                 key: month,
                 amount: monthData.totalAssets,
-                name: 'totalAssets',
+                name: '总资产',
               });
             } else if (type === 'liability') {
               data.push({
                 key: month,
                 amount: monthData.totalLiabilities,
-                name: 'totalLiabilities',
+                name: '总负债',
               });
             } else {
               data.push({
                 key: month,
                 amount: monthData.totalAssets - monthData.totalLiabilities,
-                name: 'netAssets',
+                name: '总净资产',
               });
             }
           }
@@ -116,19 +117,19 @@ export default class BalanceSheetCurve extends React.Component<
         if (lastMonthData) {
           if (accountMode === 'per') {
             if (type === 'asset') {
-              AssetAccountList.forEach((assetAccount: string) => {
+              AssetAccountList.forEach((assetAccount: AccountItem) => {
                 data.push({
                   key: year,
-                  amount: (lastMonthData as any)[assetAccount],
-                  name: assetAccount,
+                  amount: (lastMonthData as any)[assetAccount.key],
+                  name: assetAccount.title,
                 });
               });
             } else if (type === 'liability') {
-              LiabilityAccountList.forEach((liabilityAccount: string) => {
+              LiabilityAccountList.forEach((liabilityAccount: AccountItem) => {
                 data.push({
                   key: year,
-                  amount: (lastMonthData as any)[liabilityAccount],
-                  name: liabilityAccount,
+                  amount: (lastMonthData as any)[liabilityAccount.key],
+                  name: liabilityAccount.title,
                 });
               });
             }
@@ -137,20 +138,20 @@ export default class BalanceSheetCurve extends React.Component<
               data.push({
                 key: year,
                 amount: lastMonthData.totalAssets,
-                name: 'totalAssets',
+                name: '总资产',
               });
             } else if (type === 'liability') {
               data.push({
                 key: year,
                 amount: lastMonthData.totalLiabilities,
-                name: 'totalLiabilities',
+                name: '总负债',
               });
             } else {
               data.push({
                 key: year,
                 amount:
                   lastMonthData.totalAssets - lastMonthData.totalLiabilities,
-                name: 'netAssets',
+                name: '总净资产',
               });
             }
           }
