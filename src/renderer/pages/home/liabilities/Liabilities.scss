@@ -1,0 +1,10 @@
+.liabilities {
+  padding: 2em;
+  position: relative;
+
+  .balance-sheet-curve-btn {
+    position: absolute;
+    top: calc(2em + 11px);
+    left: calc(2em + 16px);
+  }
+}

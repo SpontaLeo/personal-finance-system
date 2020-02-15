@@ -69,8 +69,7 @@ class OriginForm extends React.Component<DigitalCurrencyFormProps> {
   };
 
   render() {
-    const { form } = this.props;
-    const { getFieldDecorator } = form;
+    const { getFieldDecorator } = this.props.form;
 
     return (
       <Form className="digital-currency-form">
@@ -93,7 +92,7 @@ class OriginForm extends React.Component<DigitalCurrencyFormProps> {
               parser={value => `${value}`.replace(/\$\s?|(,*)/g, '')}
             />,
           )}
-          <span className="ant-form-text"> USD</span>
+          <span className="ant-form-text">USD</span>
         </FormItem>
         <FormItem
           {...formItemStyle}
@@ -114,7 +113,7 @@ class OriginForm extends React.Component<DigitalCurrencyFormProps> {
               parser={value => `${value}`.replace(/\$\s?|(,*)/g, '')}
             />,
           )}
-          <span className="ant-form-text"> USD</span>
+          <span className="ant-form-text">USD</span>
         </FormItem>
         <FormItem
           {...formItemStyle}
@@ -135,7 +134,7 @@ class OriginForm extends React.Component<DigitalCurrencyFormProps> {
               parser={value => `${value}`.replace(/\$\s?|(,*)/g, '')}
             />,
           )}
-          <span className="ant-form-text"> USD</span>
+          <span className="ant-form-text">USD</span>
         </FormItem>
         <FormItem
           {...formItemStyle}
@@ -156,7 +155,7 @@ class OriginForm extends React.Component<DigitalCurrencyFormProps> {
               parser={value => `${value}`.replace(/\$\s?|(,*)/g, '')}
             />,
           )}
-          <span className="ant-form-text"> USD</span>
+          <span className="ant-form-text">USD</span>
         </FormItem>
         <Divider />
         <FormItem>

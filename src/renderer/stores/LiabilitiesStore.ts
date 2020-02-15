@@ -1,26 +1,113 @@
 import { action, computed, observable } from 'mobx';
 
+import BaseStore from './BaseStore';
+import { LiabilitiesItem } from '../../shared/interfaces/Liabilities';
+import LiabilitiesModel from '../models/LiabilitiesModal';
+import LiabilitiesService from '../../server/LiabilitiesService';
 import { RouterStore } from 'mobx-react-router';
+import { message } from 'antd';
 import moment from 'moment';
 
-export default class LiabilitiesStore {
+export default class LiabilitiesStore extends BaseStore {
   routingStore: RouterStore;
 
-  constructor(routingStore: RouterStore) {
-    this.routingStore = routingStore;
-  }
+  @observable
+  liabilitiesData: {
+    [key: string]: { [key: string]: LiabilitiesModel };
+  } = {};
 
   @observable
   selectedDate: moment.Moment = moment();
 
+  @observable
+  modalVisible: boolean = false;
+
   @computed
-  get selectedMonth(): number {
-    return this.selectedDate.month();
+  get selectedYear(): string {
+    return this.selectedDate.format('YYYY');
+  }
+
+  @computed
+  get selectedMonth(): string {
+    return this.selectedDate.format('MM');
+  }
+
+  @computed
+  get selectedData(): LiabilitiesModel | undefined {
+    const matchedData =
+      this.liabilitiesData[this.selectedYear] &&
+      this.liabilitiesData[this.selectedYear][this.selectedMonth];
+    return matchedData ? matchedData : undefined;
+  }
+
+  constructor(
+    routingStore: RouterStore,
+    private liabilitiesService: LiabilitiesService,
+  ) {
+    super();
+    this.routingStore = routingStore;
   }
 
   @action.bound
   onSelectDate(date?: moment.Moment) {
-    this.routingStore.push('/liabilities/detail');
     this.selectedDate = date!;
+
+    const lastYear = (date!.year() - 1).toString();
+    const lastMonth = moment(
+      date!.get('month') === 0 ? 11 : date!.get('month') - 1,
+    ).format('MM');
+
+    // 首先检查它的上一个月是否有数据，若没有则提示先填写上个月数据。从2020年1月开始
+    if (!(this.selectedYear === '2020' && this.selectedMonth === '01')) {
+      let hasDataLastMonth;
+      if (this.selectedMonth !== '01') {
+        hasDataLastMonth =
+          this.liabilitiesData[this.selectedYear] &&
+          this.liabilitiesData[this.selectedYear][lastMonth];
+      } else {
+        hasDataLastMonth =
+          this.liabilitiesData[lastYear] &&
+          this.liabilitiesData[this.selectedYear][lastMonth];
+      }
+
+      if (hasDataLastMonth) {
+        this.modalVisible = true;
+      } else {
+        message.warn('请先填写上个月数据');
+      }
+    } else {
+      this.modalVisible = true;
+    }
+  }
+
+  @action.bound
+  onPanelChange(date?: moment.Moment) {
+    this.selectedDate = date!;
+  }
+
+  @action.bound
+  closeModal() {
+    this.modalVisible = false;
+  }
+
+  @action.bound
+  queryLiabilitiesData() {
+    this.liabilitiesData = this.liabilitiesService.queryDigitalCurrencyData();
+  }
+
+  @action.bound
+  updateData(liabitiesItem: Partial<LiabilitiesItem>) {
+    this.liabilitiesService.updateData(
+      this.selectedYear,
+      this.selectedMonth,
+      liabitiesItem,
+    );
+    this.queryLiabilitiesData();
+    this.closeModal();
+  }
+
+  @action.bound
+  startBalanceSheetCurve() {
+    this.routingStore.push('liabilities/balance-sheet-curve');
   }
 }

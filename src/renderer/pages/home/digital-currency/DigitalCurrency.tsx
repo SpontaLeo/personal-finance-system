@@ -20,7 +20,7 @@ interface DigitalCurrencyProps {
 export default class DigitalCurrency extends React.Component<
   DigitalCurrencyProps
 > {
-  updateDigitalCurrency = async (values: DigitalCurrencyFieldValues) => {
+  updateDigitalCurrency = (values: DigitalCurrencyFieldValues) => {
     const digitalCurrencyStore = this.props.digitalCurrencyStore!;
 
     digitalCurrencyStore.updateData({
@@ -101,6 +101,7 @@ export default class DigitalCurrency extends React.Component<
           maskClosable={false}
           onCancel={closeModal}
           footer={null}
+          centered={true}
         >
           <DigitalCurrencyForm
             onCancel={closeModal}
