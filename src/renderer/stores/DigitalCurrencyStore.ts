@@ -57,11 +57,11 @@ export default class DigitalCurrencyStore extends BaseStore {
   @action.bound
   onSelectDate(date?: moment.Moment) {
     this.selectedDate = date!;
+    const copiedDate = JSON.parse(JSON.stringify(date!));
 
-    const lastYear = (date!.year() - 1).toString();
-    const lastMonth = moment(
-      date!.get('month') === 0 ? 11 : date!.get('month') - 1,
-    ).format('MM');
+    const lastMonthMoment = moment(copiedDate).subtract(1, 'months');
+    const lastYear = lastMonthMoment.format('YYYY');
+    const lastMonth = lastMonthMoment.format('MM');
 
     // 首先检查它的上一个月是否有数据，若没有则提示先填写上个月数据。从2020年1月开始
     if (!(this.selectedYear === '2020' && this.selectedMonth === '01')) {
@@ -73,7 +73,7 @@ export default class DigitalCurrencyStore extends BaseStore {
       } else {
         hasDataLastMonth =
           this.digitalCurrencyData[lastYear] &&
-          this.digitalCurrencyData[this.selectedYear][lastMonth];
+          this.digitalCurrencyData[lastYear][lastMonth];
       }
 
       if (hasDataLastMonth) {

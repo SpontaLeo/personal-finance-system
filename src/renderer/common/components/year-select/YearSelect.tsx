@@ -25,7 +25,7 @@ export default class YearSelect extends React.Component<YearSelectProps> {
       <Select {...this.props}>
         {this.yearArr().map((year: string) => (
           <Option
-            disabled={moment(year).isAfter(moment())}
+            // disabled={moment(year).isAfter(moment())}
             key={year}
             value={year}
           >
