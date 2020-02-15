@@ -23,12 +23,20 @@ export default class DigitalCurrencyStore extends BaseStore {
   modalVisible: boolean = false;
 
   @computed
+  get selectedYear(): string {
+    return this.selectedDate.format('YYYY');
+  }
+
+  @computed
+  get selectedMonth(): string {
+    return this.selectedDate.format('MM');
+  }
+
+  @computed
   get selectedData(): DigitalCurrencyModel | undefined {
     const matchedData =
-      this.digitalCurrencyData[this.selectedDate.format('YYYY')] &&
-      this.digitalCurrencyData[this.selectedDate.format('YYYY')][
-        this.selectedDate.format('MM')
-      ];
+      this.digitalCurrencyData[this.selectedYear] &&
+      this.digitalCurrencyData[this.selectedYear][this.selectedMonth];
     return matchedData ? matchedData : undefined;
   }
 
@@ -50,23 +58,22 @@ export default class DigitalCurrencyStore extends BaseStore {
   onSelectDate(date?: moment.Moment) {
     this.selectedDate = date!;
 
-    const year = date!.format('YYYY');
-    const month = date!.format('MM');
     const lastYear = (date!.year() - 1).toString();
     const lastMonth = moment(
       date!.get('month') === 0 ? 11 : date!.get('month') - 1,
     ).format('MM');
+
     // 首先检查它的上一个月是否有数据，若没有则提示先填写上个月数据。从2020年1月开始
-    if (!(year === '2020' && month === '01')) {
+    if (!(this.selectedYear === '2020' && this.selectedMonth === '01')) {
       let hasDataLastMonth;
-      if (month !== '01') {
+      if (this.selectedMonth !== '01') {
         hasDataLastMonth =
-          this.digitalCurrencyData[year] &&
-          this.digitalCurrencyData[year][lastMonth];
+          this.digitalCurrencyData[this.selectedYear] &&
+          this.digitalCurrencyData[this.selectedYear][lastMonth];
       } else {
         hasDataLastMonth =
           this.digitalCurrencyData[lastYear] &&
-          this.digitalCurrencyData[year][lastMonth];
+          this.digitalCurrencyData[this.selectedYear][lastMonth];
       }
 
       if (hasDataLastMonth) {
@@ -91,9 +98,11 @@ export default class DigitalCurrencyStore extends BaseStore {
 
   @action.bound
   updateData(digitalCurrencyItem: Partial<DigitalCurrencyItem>) {
-    const year = this.selectedDate.format('YYYY');
-    const month = this.selectedDate.format('MM');
-    this.digitalCurrencyService.updateData(year, month, digitalCurrencyItem);
+    this.digitalCurrencyService.updateData(
+      this.selectedYear,
+      this.selectedMonth,
+      digitalCurrencyItem,
+    );
     this.queryDigitalCurrencyData();
     this.closeModal();
   }
