@@ -19,8 +19,11 @@ export default class LiabilitiesModel extends BaseModel {
   antCheckLater: number;
   otherLiability: number;
 
+  /** 汇率 */
+  exchangeRate: number;
+
   /** 总计人民币资产 */
-  get totalCNYAssets() {
+  get totalAssets() {
     return (
       this.cash +
       this.debitCard +
@@ -29,13 +32,9 @@ export default class LiabilitiesModel extends BaseModel {
       this.alipay +
       this.wechatPay +
       this.otherAsset +
-      this.housingFund
+      this.housingFund +
+      this.digitalCurrency * this.exchangeRate
     );
-  }
-
-  /** 总计美元资产 */
-  get totalUSDAssets() {
-    return this.digitalCurrency;
   }
 
   /** 总计负债 */
@@ -60,5 +59,6 @@ export default class LiabilitiesModel extends BaseModel {
     this.borrow = data.borrow;
     this.antCheckLater = data.antCheckLater;
     this.otherLiability = data.otherLiability;
+    this.exchangeRate = data.exchangeRate;
   }
 }

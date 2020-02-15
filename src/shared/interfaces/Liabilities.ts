@@ -17,4 +17,7 @@ export interface LiabilitiesItem extends CommmonField {
   borrow: number;
   antCheckLater: number;
   otherLiability: number;
+
+  /** 汇率 */
+  exchangeRate: number;
 }

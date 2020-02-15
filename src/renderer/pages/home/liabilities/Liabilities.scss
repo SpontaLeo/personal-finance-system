@@ -7,4 +7,28 @@
     top: calc(2em + 11px);
     left: calc(2em + 16px);
   }
+
+  .month-cell-container {
+    height: 100%;
+    overflow: hidden;
+
+    .total-overview {
+      height: 100%;
+      overflow: auto;
+
+      .assets-overview,
+      .liabilities-overview {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        .asset,
+        .liability {
+          .amount {
+            padding-left: 1em;
+          }
+        }
+      }
+    }
+  }
 }
