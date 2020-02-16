@@ -6,6 +6,7 @@ import HomeStore from './HomeStore';
 import LiabilitiesStore from './LiabilitiesStore';
 import PersonalBillStore from './PersonalBillStore';
 import { RouterStore } from 'mobx-react-router';
+import TradingRecordStore from './TradingRecordStore';
 import { digitalCurrencyService } from '../../server';
 
 export const routingStore = new RouterStore();
@@ -20,3 +21,4 @@ export const liabilitiesStore = new LiabilitiesStore(
   liabilitiesService,
 );
 export const personalBillStore = new PersonalBillStore(routingStore);
+export const tradingRecordStore = new TradingRecordStore(routingStore);

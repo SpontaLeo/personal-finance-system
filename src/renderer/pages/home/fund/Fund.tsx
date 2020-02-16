@@ -89,9 +89,9 @@ export default class Fund extends React.Component<FundProps> {
           bordered={true}
           dataSource={investmentRecordList}
           pagination={
-            investmentRecordList.length >= 10
+            investmentRecordList.length >= 6
               ? {
-                  pageSize: 10,
+                  pageSize: 6,
                 }
               : false
           }
@@ -106,7 +106,7 @@ export default class Fund extends React.Component<FundProps> {
                   <Button
                     className="update-btn"
                     type="link"
-                    onClick={e => openModal(ItemActionType.MODIFY, record)}
+                    onClick={e => openModal(ItemActionType.UPDATE, record)}
                   >
                     <Icon type="edit" />
                   </Button>

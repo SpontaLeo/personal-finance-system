@@ -25,7 +25,7 @@ export default class AppServer {
         fund: [],
         'personal-bill': {},
         liabilities: {},
-        'trading-record': {},
+        'trading-record': [],
         'exchange-rate': 7,
       })
       .write();

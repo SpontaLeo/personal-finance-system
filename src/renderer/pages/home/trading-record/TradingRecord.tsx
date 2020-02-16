@@ -1,10 +1,29 @@
 import './TradingRecord.scss';
 import 'braft-editor/dist/index.css';
 
-import React from 'react';
+import { Button, List } from 'antd';
+import { inject, observer } from 'mobx-react';
 
-export default class TradingRecord extends React.Component<{}> {
+import React from 'react';
+import TradingRecordStore from '../../../stores/TradingRecordStore';
+
+interface TradingRecordProps {
+  tradingRecordStore?: TradingRecordStore;
+}
+
+@inject('tradingRecordStore')
+@observer
+export default class TradingRecord extends React.Component<TradingRecordProps> {
   render() {
-    return <div className="trading-record">交易记录</div>;
+    const { addTradingRecord } = this.props.tradingRecordStore!;
+
+    return (
+      <div className="trading-record">
+        <Button type="primary" onClick={addTradingRecord}>
+          新增交易记录
+        </Button>
+        <List />
+      </div>
+    );
   }
 }
