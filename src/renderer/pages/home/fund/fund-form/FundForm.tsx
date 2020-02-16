@@ -136,6 +136,7 @@ class OriginForm extends React.Component<FundFormProps> {
               style={{ width: '100%' }}
               size="small"
               min={0}
+              step={0.01}
               formatter={value =>
                 `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
               }

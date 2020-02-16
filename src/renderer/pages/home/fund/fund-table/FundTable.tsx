@@ -26,6 +26,9 @@ const defaultColumns: TableColumns = [
     dataIndex: 'amount',
     key: 'amount',
     align: 'center',
+    render: (text, record: FundModel) => (
+      <span>{record.amount.toFixed(2)}</span>
+    ),
   },
   {
     title: '操作',
@@ -38,6 +41,7 @@ const defaultColumns: TableColumns = [
     dataIndex: 'price',
     key: 'price',
     align: 'center',
+    render: (text, record: FundModel) => <span>{record.price.toFixed(2)}</span>,
   },
   {
     title: '市盈率(静)(PE)',

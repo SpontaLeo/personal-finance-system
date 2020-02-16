@@ -4,7 +4,6 @@ import { FundItem } from '../../shared/interfaces/Fund';
 import FundModel from '../models/FundModel';
 import FundService from '../../server/FundService';
 import { ItemActionType } from '../common/constants/interface';
-import moment from 'moment';
 
 export default class FundStore {
   @observable
@@ -19,7 +18,14 @@ export default class FundStore {
   @observable
   fundModalMode: ItemActionType = ItemActionType.CREATE;
 
-  constructor(private fundService: FundService) {}
+  constructor(private fundService: FundService) {
+    this.queryInvestmentRecordList();
+  }
+
+  @action.bound
+  queryInvestmentRecordList() {
+    this.investmentRecordList = this.fundService.queryInvestmentRecordList();
+  }
 
   @action.bound
   openModal(
@@ -41,37 +47,24 @@ export default class FundStore {
 
   @action.bound
   createFundItem(fundItem: Partial<FundItem>) {
-    this.investmentRecordList.push(
-      new FundModel(
-        Object.assign(fundItem, {
-          id: 'sfdsaflgjdlkghlahglaksvldskgndslgno',
-          createdAt: moment().toString(),
-          updatedAt: moment().toString(),
-        }) as FundItem,
-      ),
-    );
-
+    this.fundService.createFundRecord(fundItem);
+    this.queryInvestmentRecordList();
     this.closeModal();
   }
 
   @action.bound
   updateFundItem(fundItem: Partial<FundItem>) {
-    const index = this.investmentRecordList.findIndex(
-      record => record.id === this.editingInvestmentRecord!.id,
-    );
-    const updatedRecord = Object.assign(
-      this.editingInvestmentRecord!,
+    this.fundService.updateFundRecord(
+      this.editingInvestmentRecord!.id,
       fundItem,
-    ) as FundModel;
-
-    this.investmentRecordList.splice(index, 1, updatedRecord);
-
+    );
+    this.queryInvestmentRecordList();
     this.closeModal();
   }
 
   @action.bound
   deleteFundItem(id: string) {
-    const index = this.investmentRecordList.findIndex(e => e.id === id);
-    this.investmentRecordList.splice(index);
+    this.fundService.deleteFundRecore(id);
+    this.queryInvestmentRecordList();
   }
 }
