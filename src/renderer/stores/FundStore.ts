@@ -1,4 +1,4 @@
-import { action, observable } from 'mobx';
+import { action, computed, observable } from 'mobx';
 
 import { FundItem } from '../../shared/interfaces/Fund';
 import FundModel from '../models/FundModel';
@@ -18,6 +18,13 @@ export default class FundStore {
 
   @observable
   fundModalMode: ItemActionType = ItemActionType.CREATE;
+
+  @computed
+  get totalInvestmentAmount(): number {
+    return this.investmentRecordList
+      .map(record => (record.action === 'buy' ? record.amount : -record.amount))
+      .reduce((prev, cur) => prev + cur, 0);
+  }
 
   constructor(private fundService: FundService) {
     this.queryInvestmentRecordList();

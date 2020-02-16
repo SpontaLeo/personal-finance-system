@@ -1,5 +1,11 @@
 .fund {
   padding: 2em;
+
+  .fund-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .update-btn,

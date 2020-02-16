@@ -51,10 +51,10 @@ export default class Liabilities extends React.Component<LiabilitiesProps> {
       <Row className="month-cell-container">
         <Col span={12}>
           <Statistic
-            title="净资产（CNY）"
-            value={(
-              matchedData.totalAssets - matchedData.totalLiabilities
-            ).toFixed(2)}
+            title="净资产"
+            prefix="￥"
+            precision={2}
+            value={matchedData.totalAssets - matchedData.totalLiabilities}
           />
         </Col>
         <Col className="total-overview" span={12}>

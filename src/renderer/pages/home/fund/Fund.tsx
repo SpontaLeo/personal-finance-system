@@ -1,6 +1,6 @@
 import './Fund.scss';
 
-import { Button, Icon, Modal } from 'antd';
+import { Button, Icon, Modal, Statistic } from 'antd';
 import FundForm, { FundItemFieldValues } from './fund-form/FundForm';
 import { inject, observer } from 'mobx-react';
 
@@ -64,17 +64,26 @@ export default class Fund extends React.Component<FundProps> {
       closeModal,
       deleteFundItem,
       editingInvestmentRecord,
+      totalInvestmentAmount,
     } = fundStore;
 
     return (
       <div className="fund">
-        <Button
-          type="primary"
-          style={{ marginBottom: 16 }}
-          onClick={e => openModal()}
-        >
-          新增记录
-        </Button>
+        <div className="fund-top-bar">
+          <Button
+            type="primary"
+            style={{ marginBottom: 16 }}
+            onClick={e => openModal()}
+          >
+            新增记录
+          </Button>
+          <Statistic
+            title="实际已用投资"
+            prefix="¥"
+            value={totalInvestmentAmount}
+            precision={2}
+          />
+        </div>
         <FundTable
           size="middle"
           bordered={true}

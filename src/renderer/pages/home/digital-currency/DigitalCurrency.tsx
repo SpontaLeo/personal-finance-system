@@ -42,25 +42,30 @@ export default class DigitalCurrency extends React.Component<
     return matchedData ? (
       <Row>
         <Col span={12}>
-          <Statistic title="总计（USD）" value={matchedData.total.toFixed(2)} />
+          <Statistic
+            title="总计"
+            prefix="$"
+            precision={2}
+            value={matchedData.total}
+          />
         </Col>
         <Col span={12}>
           <ul className="account-overview">
             <li className="account">
               <IconFont type="icon-binance" />
-              <span className="amount">{matchedData.binance.toFixed(2)}</span>
+              <span className="amount">$ {matchedData.binance.toFixed(2)}</span>
             </li>
             <li className="account">
               <IconFont type="icon-okex" />
-              <span className="amount">{matchedData.okex.toFixed(2)}</span>
+              <span className="amount">$ {matchedData.okex.toFixed(2)}</span>
             </li>
             <li className="account">
               <IconFont type="icon-huobi" />
-              <span className="amount">{matchedData.huobi.toFixed(2)}</span>
+              <span className="amount">$ {matchedData.huobi.toFixed(2)}</span>
             </li>
             <li className="account">
               <IconFont type="icon-hopex" />
-              <span className="amount">{matchedData.hopex.toFixed(2)}</span>
+              <span className="amount">$ {matchedData.hopex.toFixed(2)}</span>
             </li>
           </ul>
         </Col>
