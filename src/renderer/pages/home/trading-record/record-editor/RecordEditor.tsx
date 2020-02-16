@@ -66,10 +66,10 @@ class EditorForm extends React.Component<EditorFormProps, EditorFormState> {
 
   cancel = () => {
     const { form, tradingRecordStore } = this.props;
-    const { cancelEdit } = tradingRecordStore!;
+    const { endEdit } = tradingRecordStore!;
 
     form.resetFields();
-    cancelEdit();
+    endEdit();
   };
 
   confirm = () => {

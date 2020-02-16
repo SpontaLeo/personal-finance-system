@@ -10,6 +10,7 @@ import { goBack } from '../common/methods/index';
 export default class TradingRecordStore {
   routingStore: RouterStore;
 
+  @observable
   actionType: ItemActionType = ItemActionType.CREATE;
 
   @observable
@@ -38,12 +39,14 @@ export default class TradingRecordStore {
   createTradingRecord(data: Partial<TradingRecordItem>) {
     this.tradingRecordService.createTradingRecord(data);
     this.queryTradingRecordData();
+    this.endEdit();
   }
 
   @action.bound
   updateTradingRecord(data: Partial<TradingRecordItem>) {
     this.tradingRecordService.updateTradingRecord(this.editingRecord!.id, data);
     this.queryTradingRecordData();
+    this.endEdit();
   }
 
   @action.bound
@@ -63,8 +66,9 @@ export default class TradingRecordStore {
   }
 
   @action.bound
-  cancelEdit() {
-    goBack();
+  endEdit() {
+    this.actionType = ItemActionType.CREATE;
     this.editingRecord = undefined;
+    goBack();
   }
 }
