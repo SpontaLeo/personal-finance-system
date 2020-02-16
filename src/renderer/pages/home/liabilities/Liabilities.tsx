@@ -52,7 +52,9 @@ export default class Liabilities extends React.Component<LiabilitiesProps> {
         <Col span={12}>
           <Statistic
             title="总计（CNY）"
-            value={matchedData.totalAssets.toFixed(2)}
+            value={(
+              matchedData.totalAssets - matchedData.totalLiabilities
+            ).toFixed(2)}
           />
         </Col>
         <Col className="total-overview" span={12}>
