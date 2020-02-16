@@ -252,7 +252,7 @@ export default class BalanceSheetCurve extends React.Component<
           <Axis
             name="amount"
             label={{
-              formatter: val => `$ ${val}`,
+              formatter: val => `¥ ${val}`,
             }}
           />
           <Tooltip

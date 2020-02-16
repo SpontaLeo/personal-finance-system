@@ -9,7 +9,7 @@ export default class FundService extends AppServer {
     return this.dbItem.value().map((m: FundItem) => new FundModel(m));
   }
 
-  addFundRecord() {}
+  createFundRecord() {}
 
   updateFundRecord() {}
 
