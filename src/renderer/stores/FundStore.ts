@@ -4,6 +4,7 @@ import { FundItem } from '../../shared/interfaces/Fund';
 import FundModel from '../models/FundModel';
 import FundService from '../../server/FundService';
 import { ItemActionType } from '../common/constants/interface';
+import moment from 'moment';
 
 export default class FundStore {
   @observable
@@ -24,7 +25,15 @@ export default class FundStore {
 
   @action.bound
   queryInvestmentRecordList() {
-    this.investmentRecordList = this.fundService.queryInvestmentRecordList();
+    this.investmentRecordList = this.fundService
+      .queryInvestmentRecordList()
+      .sort((prev: FundModel, cur: FundModel) => {
+        if (moment(prev.date).isBefore(moment(cur.date))) {
+          return -1;
+        } else {
+          return 1;
+        }
+      });
   }
 
   @action.bound
