@@ -33,6 +33,13 @@ export default class TradingRecord extends React.Component<TradingRecordProps> {
         <List
           itemLayout="horizontal"
           dataSource={tradingRecordData}
+          pagination={
+            tradingRecordData.length > 5
+              ? {
+                  pageSize: 5,
+                }
+              : false
+          }
           renderItem={item => (
             <ListItem
               actions={[

@@ -6,6 +6,7 @@ import { TradingRecordItem } from '../../shared/interfaces/TradingRecord';
 import TradingRecordModel from '../models/TradingRecordModel';
 import TradingRecordService from '../../server/TradingRecordService';
 import { goBack } from '../common/methods/index';
+import moment from 'moment';
 
 export default class TradingRecordStore {
   routingStore: RouterStore;
@@ -32,7 +33,16 @@ export default class TradingRecordStore {
 
   @action.bound
   queryTradingRecordData() {
-    this.tradingRecordData = this.tradingRecordService.queryTradingRecordData();
+    this.tradingRecordData = this.tradingRecordService
+      .queryTradingRecordData()
+      .sort((prev: TradingRecordModel, cur: TradingRecordModel) => {
+        // 按照更新时间由最新到最早排序
+        if (moment(prev.updatedAt).isAfter(moment(cur.updatedAt))) {
+          return -1;
+        } else {
+          return 1;
+        }
+      });
   }
 
   @action.bound
