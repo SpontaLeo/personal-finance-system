@@ -15,11 +15,11 @@ interface TradingRecordProps {
 @observer
 export default class TradingRecord extends React.Component<TradingRecordProps> {
   render() {
-    const { addTradingRecord } = this.props.tradingRecordStore!;
+    const { jumpToEditor } = this.props.tradingRecordStore!;
 
     return (
       <div className="trading-record">
-        <Button type="primary" onClick={addTradingRecord}>
+        <Button type="primary" onClick={e => jumpToEditor()}>
           新增交易记录
         </Button>
         <List />

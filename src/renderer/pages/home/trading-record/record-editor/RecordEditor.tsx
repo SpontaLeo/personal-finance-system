@@ -1,6 +1,7 @@
 import './RecordEditor.scss';
+import 'braft-editor/dist/index.css';
 
-import BraftEditor, { ControlType } from 'braft-editor';
+import BraftEditor, { ControlType, EditorState } from 'braft-editor';
 import { Button, Form, Input } from 'antd';
 import { inject, observer } from 'mobx-react';
 
@@ -22,8 +23,8 @@ const controls: ControlType[] = [
 const FormItem = Form.Item;
 
 const formItemStyle = {
-  labelCol: { span: 4, offset: 3 },
-  wrapperCol: { span: 12 },
+  labelCol: { span: 2 },
+  wrapperCol: { span: 20 },
   style: {
     marginBottom: 0,
   },
@@ -38,7 +39,7 @@ enum EditorFormField {
 export type EditorFormFieldValues = {
   title: string;
   tags: string[];
-  content: string;
+  content: EditorState;
 };
 
 type EditorFormFieldErrors = {
@@ -52,7 +53,6 @@ type EditorFormFieldErrors = {
 
 interface EditorFormProps extends FormComponentProps {
   tradingRecordStore?: TradingRecordStore;
-  onConfirm: (values: EditorFormFieldValues) => void;
 }
 
 interface EditorFormState {
@@ -73,12 +73,32 @@ class EditorForm extends React.Component<EditorFormProps, EditorFormState> {
   };
 
   confirm = () => {
-    const { form, onConfirm } = this.props;
+    const { form, tradingRecordStore } = this.props;
+    const {
+      createTradingRecord,
+      updateTradingRecord,
+      editingRecord,
+    } = tradingRecordStore!;
 
     form.validateFieldsAndScroll(
       (errors: EditorFormFieldErrors, values: EditorFormFieldValues) => {
         if (!errors) {
-          onConfirm && onConfirm(values);
+          if (!!editingRecord) {
+            updateTradingRecord({
+              title: values.title,
+              tags: values.tags,
+              content: JSON.stringify(
+                // toRAW的接口返回类型为 RawDraftContentState | string，其中第一种类型为draft-js提供
+                values.content.toRAW(),
+              ),
+            });
+          } else {
+            createTradingRecord({
+              title: values.title,
+              tags: values.tags,
+              content: JSON.stringify(values.content.toRAW()),
+            });
+          }
         }
       },
     );
@@ -97,7 +117,7 @@ class EditorForm extends React.Component<EditorFormProps, EditorFormState> {
         <FormItem {...formItemStyle} label="标签">
           {getFieldDecorator('tags')(<Input />)}
         </FormItem>
-        <FormItem {...formItemStyle} label="正文">
+        <FormItem className="editor-container" {...formItemStyle} label="正文">
           {getFieldDecorator('content', {
             validateTrigger: 'onBlur',
             rules: [
@@ -112,7 +132,7 @@ class EditorForm extends React.Component<EditorFormProps, EditorFormState> {
                 },
               },
             ],
-          })(<BraftEditor controls={controls} placeholder="请输入正文" />)}
+          })(<BraftEditor controls={controls} placeholder="写点交易心得吧" />)}
         </FormItem>
         <FormItem>
           <div className="form-buttons">
@@ -139,14 +159,15 @@ const RecordEditor = Form.create<EditorFormProps>({
     const { editingRecord } = props.tradingRecordStore!;
 
     if (!!editingRecord) {
-      Object.keys(editingRecord as EditorFormFieldValues).forEach(k => {
+      Object.keys(editingRecord).forEach(k => {
         if (k !== 'content') {
           values[k] = Form.createFormField({
             value: (editingRecord as any)[k],
           });
         } else {
           values[k] = Form.createFormField({
-            value: BraftEditor.createEditorState(editingRecord[k]),
+            // 保存时序列化，初始化时反序列化
+            value: BraftEditor.createEditorState(JSON.parse(editingRecord[k])),
           });
         }
       });

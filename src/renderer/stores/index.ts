@@ -1,4 +1,8 @@
-import { fundService, liabilitiesService } from '../../server/index';
+import {
+  fundService,
+  liabilitiesService,
+  tradingRecordService,
+} from '../../server/index';
 
 import DigitalCurrencyStore from './DigitalCurrencyStore';
 import FundStore from './FundStore';
@@ -21,4 +25,7 @@ export const liabilitiesStore = new LiabilitiesStore(
   liabilitiesService,
 );
 export const personalBillStore = new PersonalBillStore(routingStore);
-export const tradingRecordStore = new TradingRecordStore(routingStore);
+export const tradingRecordStore = new TradingRecordStore(
+  routingStore,
+  tradingRecordService,
+);
