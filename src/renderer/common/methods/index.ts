@@ -5,8 +5,7 @@ export function goBack() {
 }
 
 export function generateBrief(html: string, length: number = 120): string {
-  if (html.length < length) return html;
-  let Foremost = html.substr(0, length);
+  let Foremost = html.substr(0, html.length >= 120 ? length : html.length);
   const reg = /<(\/?)(BODY|SCRIPT|P|DIV|H1|H2|H3|H4|H5|H6|ADDRESS|PRE|TABLE|TR|TD|TH|INPUT|SELECT|htmlAREA|OBJECT|A|UL|OL|LI|BASE|META|LINK|HR|BR|PARAM|IMG|AREA|INPUT|SPAN)[^>]*(>?)/gi;
   const singlable = /BASE|META|LINK|HR|BR|PARAM|IMG|AREA|INPUT/i;
   const Stack = [],
@@ -43,5 +42,5 @@ export function generateBrief(html: string, length: number = 120): string {
 }
 
 function replaceHtmlTag(html: string): string {
-  return html.replace(/<[^<>]+>/g, '');
+  return html.replace(/<\/?.+?>/g, '');
 }

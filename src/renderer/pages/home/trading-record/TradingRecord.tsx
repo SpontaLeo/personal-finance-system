@@ -1,9 +1,10 @@
 import './TradingRecord.scss';
 import 'braft-editor/dist/index.css';
 
-import { Button, Icon, List } from 'antd';
+import { Button, Icon, List, Statistic } from 'antd';
 import { inject, observer } from 'mobx-react';
 
+import { IconFont } from '../../../common/components';
 import { ItemActionType } from '../../../common/constants/interface';
 import React from 'react';
 import TradingRecordStore from '../../../stores/TradingRecordStore';
@@ -27,9 +28,15 @@ export default class TradingRecord extends React.Component<TradingRecordProps> {
 
     return (
       <div className="trading-record">
-        <Button type="primary" onClick={e => jumpToEditor()}>
-          新增交易记录
-        </Button>
+        <div className="tool-bar">
+          <Button type="primary" onClick={e => jumpToEditor()}>
+            新增交易记录
+          </Button>
+          <Statistic
+            value={tradingRecordData.length}
+            suffix={<IconFont type="icon-piece" />}
+          />
+        </div>
         <List
           itemLayout="horizontal"
           dataSource={tradingRecordData}
