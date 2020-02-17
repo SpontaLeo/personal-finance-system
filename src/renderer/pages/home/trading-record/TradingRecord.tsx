@@ -38,6 +38,9 @@ export default class TradingRecord extends React.Component<TradingRecordProps> {
           />
         </div>
         <List
+          locale={{
+            emptyText: '开始记录你的交易吧~',
+          }}
           itemLayout="horizontal"
           dataSource={tradingRecordData}
           pagination={

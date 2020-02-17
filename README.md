@@ -35,7 +35,7 @@ A tool for managing personal finances.
 ## 交易记录
 
 - [x] 交易记录（增删改）
-- [ ] 交易记录摘要生成
+- [x] 交易记录摘要生成
 - [ ] 交易记录标签
 - [ ] 交易记录操作品种
 
