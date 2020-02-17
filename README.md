@@ -38,6 +38,8 @@ A tool for managing personal finances.
 - [x] 交易记录分类
 - [x] 交易记录标的
 - [ ] 交易记录筛选器（分类）
+- [ ] 交易记录编辑器 markdown 语法支持
+- [ ] 交易记录编辑器 toolbar 配置
 
 ## 体验优化
 
