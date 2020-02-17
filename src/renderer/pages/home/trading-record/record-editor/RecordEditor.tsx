@@ -8,6 +8,7 @@ import { inject, observer } from 'mobx-react';
 import { FormComponentProps } from 'antd/lib/form';
 import React from 'react';
 import TradingRecordStore from '../../../../stores/TradingRecordStore';
+import { generateBrief } from '../../../../common/methods/index';
 
 const controls: ControlType[] = [
   'bold',
@@ -91,12 +92,14 @@ class EditorForm extends React.Component<EditorFormProps, EditorFormState> {
                 // toRAW的接口返回类型为 RawDraftContentState | string，其中第一种类型为draft-js提供
                 values.content.toRAW(),
               ),
+              brief: generateBrief(values.content.toHTML()),
             });
           } else {
             createTradingRecord({
               title: values.title,
               tags: values.tags,
               content: JSON.stringify(values.content.toRAW()),
+              brief: generateBrief(values.content.toHTML()),
             });
           }
         }

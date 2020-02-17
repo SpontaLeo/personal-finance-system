@@ -14,16 +14,16 @@
     "lowdb": "^1.0.0"
   },
   "scripts": {
-    "start": "concurrently \"npm run start:react\" \"npm run start:electron\"",
-    "start:react": "cross-env BROWSER=none react-app-rewired start",
+    "start": "concurrently \"npm run start:renderer\" \"npm run start:main\"",
+    "start:renderer": "cross-env BROWSER=none react-app-rewired start",
     "build": "npm run build:copy && npm run pack",
-    "build:react": "react-app-rewired build",
-    "build:copy": "npm run build:react && npm run copy:electron",
+    "build:renderer": "react-app-rewired build",
+    "build:copy": "npm run build:renderer && npm run copy:main",
     "pack": "electron-builder --config electron-builder.yml",
-    "copy:electron": "cp -r ./app/. ./build",
+    "copy:main": "cp -r ./app/. ./build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
-    "start:electron": "wait-on http://localhost:3000 && electron ."
+    "start:main": "wait-on http://localhost:3000 && electron ."
   },
   "eslintConfig": {
     "extends": "react-app"

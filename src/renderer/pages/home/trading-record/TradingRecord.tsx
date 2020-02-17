@@ -65,7 +65,7 @@ export default class TradingRecord extends React.Component<TradingRecordProps> {
                     {item.title}
                   </Button>
                 }
-                description={item.title}
+                description={item.brief}
               />
               <div>{item.tags}</div>
             </ListItem>
