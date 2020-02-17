@@ -38,8 +38,9 @@ A tool for managing personal finances.
 - [x] 交易记录分类
 - [x] 交易记录标的
 - [ ] 交易记录筛选器（分类）
-- [ ] 交易记录编辑器 markdown 语法支持
-- [ ] 交易记录编辑器 toolbar 配置
+- [ ] 交易记录编辑器 markdown 语法支持（由于 braft-extensions 暂未提供 typescript 支持，因此该功能暂时搁置）
+- [x] 交易记录编辑器 toolbar 配置
+- [ ] 交易记录模板
 
 ## 体验优化
 

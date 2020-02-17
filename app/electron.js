@@ -31,10 +31,10 @@ function createDevTools() {
 function createWindow() {
   // 创建浏览器窗口。
   win = new BrowserWindow({
-    width: 1080,
-    height: 810,
-    minWidth: 1000,
-    minHeight: 750,
+    width: 1280,
+    height: 960,
+    minWidth: 1080,
+    minHeight: 810,
     webPreferences: {
       nodeIntegration: true,
     },
