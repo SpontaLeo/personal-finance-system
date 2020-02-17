@@ -1,12 +1,13 @@
 import './TradingRecord.scss';
 import 'braft-editor/dist/index.css';
 
-import { Button, Icon, List, Statistic } from 'antd';
+import { Button, Col, Icon, List, Row, Statistic, Tag } from 'antd';
 import { inject, observer } from 'mobx-react';
 
 import { IconFont } from '../../../common/components';
 import { ItemActionType } from '../../../common/constants/interface';
 import React from 'react';
+import { TradingCategory } from '../../../common/constants/TradingCategory';
 import TradingRecordStore from '../../../stores/TradingRecordStore';
 
 const ListItem = List.Item;
@@ -50,36 +51,56 @@ export default class TradingRecord extends React.Component<TradingRecordProps> {
                 }
               : false
           }
-          renderItem={item => (
-            <ListItem
-              actions={[
-                <Button
-                  className="edit-btn"
-                  type="link"
-                  onClick={e => jumpToEditor(ItemActionType.UPDATE, item)}
-                >
-                  <Icon type="edit" />
-                </Button>,
-                <Button
-                  className="delete-btn"
-                  type="link"
-                  onClick={e => deleteTradingRecord(item.id)}
-                >
-                  <Icon type="delete" />
-                </Button>,
-              ]}
-            >
-              <Meta
-                title={
-                  <Button className="view-btn" type="link">
-                    {item.title}
-                  </Button>
-                }
-                description={item.brief}
-              />
-              <div>{item.tags}</div>
-            </ListItem>
-          )}
+          renderItem={item => {
+            const categoryItem = TradingCategory.filter(
+              category => category.key === item.category,
+            )[0]!;
+
+            return (
+              <ListItem
+                actions={[
+                  <Button
+                    className="edit-btn"
+                    type="link"
+                    onClick={e => jumpToEditor(ItemActionType.UPDATE, item)}
+                  >
+                    <Icon type="edit" />
+                  </Button>,
+                  <Button
+                    className="delete-btn"
+                    type="link"
+                    onClick={e => deleteTradingRecord(item.id)}
+                  >
+                    <Icon type="delete" />
+                  </Button>,
+                ]}
+              >
+                <Meta
+                  title={
+                    <Row className="meta-content">
+                      <Col span={16}>
+                        <Button className="view-btn" type="link">
+                          {item.title}
+                        </Button>
+                      </Col>
+                      <Col span={4}>
+                        <Tag
+                          className="meta-category-tag"
+                          color={categoryItem.color}
+                        >
+                          {categoryItem.title}
+                        </Tag>
+                      </Col>
+                      <Col span={4}>
+                        <span className="meta-target">{item.target}</span>
+                      </Col>
+                    </Row>
+                  }
+                  description={item.brief}
+                />
+              </ListItem>
+            );
+          }}
         />
       </div>
     );

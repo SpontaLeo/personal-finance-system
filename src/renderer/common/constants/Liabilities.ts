@@ -1,9 +1,5 @@
-export interface AccountItem {
-  key: string;
-  title: string;
-}
-
-export const AssetAccountList: AccountItem[] = [
+import { KtItem } from './interface';
+export const AssetAccountList: KtItem[] = [
   {
     key: 'cash',
     title: '现金',
@@ -42,7 +38,7 @@ export const AssetAccountList: AccountItem[] = [
   },
 ];
 
-export const LiabilityAccountList: AccountItem[] = [
+export const LiabilityAccountList: KtItem[] = [
   {
     key: 'creditCard',
     title: '信用卡',

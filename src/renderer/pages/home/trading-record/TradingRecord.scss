@@ -7,8 +7,16 @@
   }
 }
 
-.view-btn {
-  padding: 0;
+.meta-content {
+  .view-btn {
+    padding: 0;
+  }
+
+  .meta-category-tag,
+  .meta-target {
+    margin-left: 1em;
+    margin-right: 0;
+  }
 }
 
 .ant-list-item-action {

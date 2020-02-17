@@ -2,10 +2,15 @@ import './RecordEditor.scss';
 import 'braft-editor/dist/index.css';
 
 import BraftEditor, { ControlType, EditorState } from 'braft-editor';
-import { Button, Form, Input } from 'antd';
+import { Button, Col, Form, Input, Row, Select } from 'antd';
+import {
+  TradingCategory,
+  TradingRecordKtItem,
+} from '../../../../common/constants/TradingCategory';
 import { inject, observer } from 'mobx-react';
 
 import { FormComponentProps } from 'antd/lib/form';
+import { KtItem } from '../../../../common/constants/interface';
 import React from 'react';
 import TradingRecordStore from '../../../../stores/TradingRecordStore';
 import { trimHtml } from '../../../../common/methods/index';
@@ -22,6 +27,7 @@ const controls: ControlType[] = [
 ];
 
 const FormItem = Form.Item;
+const Option = Select.Option;
 
 const formItemStyle = {
   labelCol: { span: 2 },
@@ -31,15 +37,25 @@ const formItemStyle = {
   },
 };
 
+const categoryAndTargetItemStyle = {
+  labelCol: { span: 4 },
+  wrapperCol: { span: 16 },
+  style: {
+    marginBottom: 0,
+  },
+};
+
 enum EditorFormField {
   TITLE = 'title',
-  TAGS = 'tags',
+  CATEGORY = 'category',
+  TARGET = 'target',
   CONTENT = 'content',
 }
 
 export type EditorFormFieldValues = {
   title: string;
-  tags: string[];
+  category: string;
+  target: string;
   content: EditorState;
 };
 
@@ -47,7 +63,7 @@ type EditorFormFieldErrors = {
   [key in EditorFormField]: {
     errors: {
       message: string;
-      field: EditorFormField; 
+      field: EditorFormField;
     }[];
   };
 };
@@ -87,7 +103,8 @@ class EditorForm extends React.Component<EditorFormProps, EditorFormState> {
           if (!!editingRecord) {
             updateTradingRecord({
               title: values.title,
-              tags: values.tags,
+              category: values.category,
+              target: values.target,
               content: JSON.stringify(
                 // toRAW的接口返回类型为 RawDraftContentState | string，其中第一种类型为draft-js提供
                 values.content.toRAW(),
@@ -97,7 +114,8 @@ class EditorForm extends React.Component<EditorFormProps, EditorFormState> {
           } else {
             createTradingRecord({
               title: values.title,
-              tags: values.tags,
+              category: values.category,
+              target: values.target,
               content: JSON.stringify(values.content.toRAW()),
               brief: trimHtml(values.content.toHTML()),
             });
@@ -117,9 +135,30 @@ class EditorForm extends React.Component<EditorFormProps, EditorFormState> {
             rules: [{ required: true, message: '请输入标题' }],
           })(<Input />)}
         </FormItem>
-        <FormItem {...formItemStyle} label="标签">
-          {getFieldDecorator('tags')(<Input />)}
-        </FormItem>
+        <Row>
+          <Col span={12}>
+            <FormItem {...categoryAndTargetItemStyle} label="类型">
+              {getFieldDecorator('category', {
+                rules: [{ required: true, message: '请选择类型' }],
+              })(
+                <Select>
+                  {TradingCategory.map((category: TradingRecordKtItem) => (
+                    <Option key={category.key} value={category.key}>
+                      {category.title}
+                    </Option>
+                  ))}
+                </Select>,
+              )}
+            </FormItem>
+          </Col>
+          <Col span={12}>
+            <FormItem {...categoryAndTargetItemStyle} label="品种">
+              {getFieldDecorator('target', {
+                rules: [{ required: true, message: '请输入品种' }],
+              })(<Input />)}
+            </FormItem>
+          </Col>
+        </Row>
         <FormItem className="editor-container" {...formItemStyle} label="正文">
           {getFieldDecorator('content', {
             validateTrigger: 'onBlur',

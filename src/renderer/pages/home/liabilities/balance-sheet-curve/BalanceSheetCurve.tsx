@@ -7,8 +7,8 @@ import {
 import { Axis, Chart, Geom, Legend, Tooltip } from 'bizcharts';
 import { inject, observer } from 'mobx-react';
 
-import { AccountItem } from '../../../../common/constants/Liabilities';
 import { IconFont } from '../../../../common/components/icon-font/index';
+import { KtItem } from '../../../../common/constants/interface';
 import LiabilitiesModel from '../../../../models/LiabilitiesModal';
 import LiabilitiesStore from '../../../../stores/LiabilitiesStore';
 import { Radio } from 'antd';
@@ -70,7 +70,7 @@ export default class BalanceSheetCurve extends React.Component<
           if (accountMode === 'per') {
             // 单个账户模式下，只能选择资产和负债，不能选择净资产
             if (type === 'asset') {
-              AssetAccountList.forEach((assetAccount: AccountItem) => {
+              AssetAccountList.forEach((assetAccount: KtItem) => {
                 data.push({
                   key: month,
                   amount: (monthData as any)[assetAccount.key],
@@ -78,7 +78,7 @@ export default class BalanceSheetCurve extends React.Component<
                 });
               });
             } else if (type === 'liability') {
-              LiabilityAccountList.forEach((liabilityAccount: AccountItem) => {
+              LiabilityAccountList.forEach((liabilityAccount: KtItem) => {
                 data.push({
                   key: month,
                   amount: (monthData as any)[liabilityAccount.key],
@@ -117,7 +117,7 @@ export default class BalanceSheetCurve extends React.Component<
         if (lastMonthData) {
           if (accountMode === 'per') {
             if (type === 'asset') {
-              AssetAccountList.forEach((assetAccount: AccountItem) => {
+              AssetAccountList.forEach((assetAccount: KtItem) => {
                 data.push({
                   key: year,
                   amount: (lastMonthData as any)[assetAccount.key],
@@ -125,7 +125,7 @@ export default class BalanceSheetCurve extends React.Component<
                 });
               });
             } else if (type === 'liability') {
-              LiabilityAccountList.forEach((liabilityAccount: AccountItem) => {
+              LiabilityAccountList.forEach((liabilityAccount: KtItem) => {
                 data.push({
                   key: year,
                   amount: (lastMonthData as any)[liabilityAccount.key],
