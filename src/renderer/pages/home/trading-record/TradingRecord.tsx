@@ -25,6 +25,7 @@ export default class TradingRecord extends React.Component<TradingRecordProps> {
       jumpToEditor,
       tradingRecordData,
       deleteTradingRecord,
+      viewRecordDetail,
     } = this.props.tradingRecordStore!;
 
     return (
@@ -79,7 +80,11 @@ export default class TradingRecord extends React.Component<TradingRecordProps> {
                   title={
                     <Row className="meta-content">
                       <Col span={16}>
-                        <Button className="view-btn" type="link">
+                        <Button
+                          className="view-btn"
+                          type="link"
+                          onClick={e => viewRecordDetail(item)}
+                        >
                           {item.title}
                         </Button>
                       </Col>

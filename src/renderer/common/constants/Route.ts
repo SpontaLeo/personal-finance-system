@@ -5,6 +5,7 @@ import DigitalCurrency from '../../pages/home/digital-currency/DigitalCurrency';
 import Fund from '../../pages/home/fund/Fund';
 import Liabilities from '../../pages/home/liabilities/Liabilities';
 import PersonalBill from '../../pages/home/personal-bill/PersonalBill';
+import RecordDetail from '../../pages/home/trading-record/record-detail/RecordDetail';
 import RecordEditor from '../../pages/home/trading-record/record-editor/RecordEditor';
 import TradingRecord from '../../pages/home/trading-record/TradingRecord';
 
@@ -79,5 +80,11 @@ export const ChildRoute: RouteItem[] = [
     parentKey: 'trading-record',
     to: '/trading-record/editor',
     component: RecordEditor,
+  },
+  {
+    key: 'record-detail',
+    parentKey: 'trading-record',
+    to: '/trading-record/record-detail',
+    component: RecordDetail,
   },
 ];

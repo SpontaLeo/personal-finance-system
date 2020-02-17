@@ -18,7 +18,7 @@ export default class TradingRecordStore {
   tradingRecordData: TradingRecordModel[] = [];
 
   @observable
-  editingRecord: TradingRecordModel | undefined = undefined;
+  selectedRecord: TradingRecordModel | undefined = undefined;
 
   @observable
   readOnly: boolean = true;
@@ -54,7 +54,10 @@ export default class TradingRecordStore {
 
   @action.bound
   updateTradingRecord(data: Partial<TradingRecordItem>) {
-    this.tradingRecordService.updateTradingRecord(this.editingRecord!.id, data);
+    this.tradingRecordService.updateTradingRecord(
+      this.selectedRecord!.id,
+      data,
+    );
     this.queryTradingRecordData();
     this.endEdit();
   }
@@ -71,14 +74,20 @@ export default class TradingRecordStore {
     record?: TradingRecordModel,
   ) {
     this.actionType = type;
-    this.editingRecord = record;
+    this.selectedRecord = record;
     this.routingStore.push('trading-record/editor');
+  }
+
+  @action.bound
+  viewRecordDetail(record: TradingRecordModel) {
+    this.selectedRecord = record;
+    this.routingStore.push('trading-record/record-detail');
   }
 
   @action.bound
   endEdit() {
     this.actionType = ItemActionType.CREATE;
-    this.editingRecord = undefined;
+    this.selectedRecord = undefined;
     goBack();
   }
 }
