@@ -16,12 +16,12 @@ A tool for managing personal finances.
 
 - [x] 基金定投记录(增删改)
 - [x] 基金定投记录表格排序
-- [ ] 基金定投记录导出
+- [ ] 基金定投记录导出(Excel)
 
 ## 个人账单
 
-- [ ] 收入记录
-- [ ] 支出记录
+- [ ] 收入记录（月/年）
+- [ ] 支出记录（月/年）
 - [ ] 收入分析（曲线图）
 - [ ] 支出分析（曲线图/饼图）
 
@@ -38,6 +38,7 @@ A tool for managing personal finances.
 - [x] 交易记录分类
 - [x] 交易记录标的
 - [ ] 交易记录筛选器（分类）
+- [ ] 交易记录搜索
 - [ ] 交易记录编辑器 markdown 语法支持（由于 braft-extensions 暂未提供 typescript 支持，因此该功能暂时搁置）
 - [x] 交易记录编辑器 toolbar 配置
 - [ ] 交易记录模板
