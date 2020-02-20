@@ -11,6 +11,7 @@ A tool for managing personal finances.
 - [x] 账户资产数据录入(okex, huobi, binance, hopex)
 - [x] 单个/整体账户资金曲线分析(月/年)
 - [ ] 资金曲线分析数据导出(Excel)
+- [ ] 资金账户冲提金额（新增月份的实际金额要增/减对应的提/充金额）
 
 ## 基金定投
 

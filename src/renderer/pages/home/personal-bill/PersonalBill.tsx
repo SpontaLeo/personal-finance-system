@@ -16,16 +16,16 @@ interface PersonalBillProps {
 export default class PersonalBill extends React.Component<PersonalBillProps> {
   render() {
     const personalBillStore = this.props.personalBillStore!;
-    const { selectedValue, onDateChange } = personalBillStore;
+    const { onSelectDate } = personalBillStore;
 
     return (
       <Calendar
-        value={selectedValue}
-        validRange={[moment('2020-01-01'), moment('2099-12-31')]}
+        mode="year"
+        validRange={[moment('2020-01-01'), moment()]}
         disabledDate={(currentDate: moment.Moment) => {
           return currentDate.isAfter(moment());
         }}
-        onSelect={onDateChange}
+        onSelect={onSelectDate}
       />
     );
   }

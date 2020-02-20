@@ -12,6 +12,18 @@ export default class TradingRecordService extends AppServer {
       .map((record: TradingRecordItem) => new TradingRecordModel(record));
   }
 
+  queryTradingRecordByCategory(category: string): TradingRecordModel[] {
+    // 根据类型筛选
+    return [];
+  }
+
+  fuzzyQueryTradingRecordByTitle(
+    fuzzyQueryTitle: string,
+  ): TradingRecordModel[] {
+    // 根据标题模糊查询
+    return [];
+  }
+
   createTradingRecord(data: Partial<TradingRecordItem>) {
     this.dbItem
       .push(

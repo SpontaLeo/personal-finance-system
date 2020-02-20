@@ -1,6 +1,6 @@
-import { CommmonField } from './common';
+import { CommonField } from './common';
 
-export interface LiabilitiesItem extends CommmonField {
+export interface LiabilitiesItem extends CommonField {
   /** 资产，其中digitalCurrency为USD资产，其它为CNY资产 */
   cash: number;
   debitCard: number;

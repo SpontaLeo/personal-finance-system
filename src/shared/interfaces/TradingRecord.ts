@@ -1,6 +1,6 @@
-import { CommmonField } from './common';
+import { CommonField } from './common';
 
-export interface TradingRecordItem extends CommmonField {
+export interface TradingRecordItem extends CommonField {
   title: string;
   // 市场类型
   category: string;

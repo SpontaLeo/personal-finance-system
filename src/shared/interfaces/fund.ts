@@ -1,6 +1,6 @@
-import { CommmonField } from './common';
+import { CommonField } from './common';
 
-export interface FundItem extends CommmonField {
+export interface FundItem extends CommonField {
   date: string;
   target: string;
   amount: number;
